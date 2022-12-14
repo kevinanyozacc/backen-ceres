@@ -1,0 +1,198 @@
+version: "3.9"
+services:
+  dev_gateway:
+    build:
+      context: ./gateway-api
+      dockerfile: Dockerfile.dev
+    ports:
+      - "8080:8080"
+    links:
+      - dev_search
+      - dev_slaughterhouse
+      - dev_animal
+      - dev_farm
+      - dev_export_processing_plant
+      - dev_livestock_exporter
+      - dev_agricultural_exporter
+      - dev_organic_certifier
+      - dev_agricultural_supplies
+      - dev_feed_processing
+      - dev_poultry_farm
+      - dev_livestock_supplies
+      - dev_users
+      - dev_primary_processing
+    entrypoint: nodemon ./src/server.js
+    volumes:
+      - /app/node_modules
+      - ./gateway-api:/app
+    env_file:
+      - ./gateway-api/.env
+  dev_search:
+    build:
+      context: ./search-api
+      dockerfile: Dockerfile.dev
+    ports:
+      - "8081:8080"
+    entrypoint: nodemon ./src/server.js
+    volumes:
+      - /app/node_modules
+      - ./search-api:/app
+    env_file:
+      - ./search-api/.env
+  dev_slaughterhouse:
+    build:
+      context: ./slaughterhouse-api
+      dockerfile: Dockerfile.dev
+    ports:
+      - "8082:8080"
+    entrypoint: nodemon ./src/server.js
+    volumes:
+      - /app/node_modules
+      - ./slaughterhouse-api:/app
+    env_file:
+      - ./slaughterhouse-api/.env
+  ## desde
+  dev_users:
+    build:
+      context: ./users-api
+      dockerfile: Dockerfile.dev
+    ports:
+      - "8083:8080"
+    entrypoint: nodemon ./src/server.js
+    volumes:
+      - /app/node_modules
+      - ./users-api:/app
+    env_file:
+      - ./users-api/.env
+  dev_livestock_supplies:
+    build:
+      context: ./livestock-supplies-api
+      dockerfile: Dockerfile.dev
+    ports:
+      - "8084:8080"
+    entrypoint: nodemon ./src/server.js
+    volumes:
+      - /app/node_modules
+      - ./livestock-supplies-api:/app
+    env_file:
+      - ./livestock-supplies-api/.env
+  dev_poultry_farm:
+    build:
+      context: ./poultry-farm-api
+      dockerfile: Dockerfile.dev
+    ports:
+      - "8085:8080"
+    entrypoint: nodemon ./src/server.js
+    volumes:
+      - /app/node_modules
+      - ./poultry-farm-api:/app
+    env_file:
+      - ./poultry-farm-api/.env
+  dev_feed_processing:
+    build:
+      context: ./feed-processing-api
+      dockerfile: Dockerfile.dev
+    ports:
+      - "8086:8080"
+    entrypoint: nodemon ./src/server.js
+    volumes:
+      - /app/node_modules
+      - ./feed-processing-api:/app
+    env_file:
+      - ./feed-processing-api/.env
+  dev_agricultural_supplies:
+    build:
+      context: ./agricultural-supplies-api
+      dockerfile: Dockerfile.dev
+    ports:
+      - "8087:8080"
+    entrypoint: nodemon ./src/server.js
+    volumes:
+      - /app/node_modules
+      - ./agricultural-supplies-api:/app
+    env_file:
+      - ./agricultural-supplies-api/.env
+  dev_organic_certifier:
+    build:
+      context: ./organic-certifier-api
+      dockerfile: Dockerfile.dev
+    ports:
+      - "8088:8080"
+    entrypoint: nodemon ./src/server.js
+    volumes:
+      - /app/node_modules
+      - ./organic-certifier-api:/app
+    env_file:
+      - ./organic-certifier-api/.env
+  dev_agricultural_exporter:
+    build:
+      context: ./agricultural-exporter-api
+      dockerfile: Dockerfile.dev
+    ports:
+      - "8089:8080"
+    entrypoint: nodemon ./src/server.js
+    volumes:
+      - /app/node_modules
+      - ./agricultural-exporter-api:/app
+    env_file:
+      - ./agricultural-exporter-api/.env
+  dev_livestock_exporter:
+    build:
+      context: ./livestock-exporter-api
+      dockerfile: Dockerfile.dev
+    ports:
+      - "8090:8080"
+    entrypoint: nodemon ./src/server.js
+    volumes:
+      - /app/node_modules
+      - ./livestock-exporter-api:/app
+    env_file:
+      - ./livestock-exporter-api/.env
+  dev_export_processing_plant:
+    build:
+      context: ./export-processing-plant-api
+      dockerfile: Dockerfile.dev
+    ports:
+      - "8091:8080"
+    entrypoint: nodemon ./src/server.js
+    volumes:
+      - /app/node_modules
+      - ./export-processing-plant-api:/app
+    env_file:
+      - ./export-processing-plant-api/.env
+  dev_farm:
+      build:
+        context: ./farm-api
+        dockerfile: Dockerfile.dev
+      ports:
+      - "8092:8080"
+      entrypoint: nodemon ./src/server.js
+      volumes:
+        - /app/node_modules
+        - ./farm-api:/app
+      env_file:
+        - ./farm-api/.env
+  dev_animal:
+      build:
+        context: ./animal-api
+        dockerfile: Dockerfile.dev
+      ports:
+      - "8093:8080"
+      entrypoint: nodemon ./src/server.js
+      volumes:
+        - /app/node_modules
+        - ./animal-api:/app
+      env_file:
+        - ./animal-api/.env
+  dev_primary_processing:
+    build:
+      context: ./primary-processing-api
+      dockerfile: Dockerfile.dev
+    ports:
+      - "8094:8080"
+    entrypoint: nodemon ./src/server.js
+    volumes:
+      - /app/node_modules
+      - ./primary-processing-api:/app
+    env_file:
+      - ./primary-processing-api/.env

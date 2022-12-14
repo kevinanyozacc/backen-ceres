@@ -1,0 +1,212 @@
+version: "3.9"
+services:
+  users:
+    build: ./users-api
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 100M
+    ports:
+      - "8080:8080"
+    environment:
+      USER: <DB_SENASA_USER>
+      PASSWORD: <DB_SENASA_PASSWORD>
+      DSN: (DESCRIPTION=(ADDRESS= (PROTOCOL=TCP)(HOST=10.0.0.73)(PORT=1521))(CONNECT_DATA=(INSTANCE_NAME=sigqa1)(SERVER=dedicated)(SERVICE_NAME=sigqa)))
+      ORIGIN: "*"
+      PORT: 8080
+  search:
+    build: ./search-api
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 100M
+    ports:
+      - "8081:8080"
+    environment:
+      USER: <DB_SENASA_USER>
+      PASSWORD: <DB_SENASA_PASSWORD>
+      DSN: (DESCRIPTION=(ADDRESS= (PROTOCOL=TCP)(HOST=10.0.0.73)(PORT=1521))(CONNECT_DATA=(INSTANCE_NAME=sigqa1)(SERVER=dedicated)(SERVICE_NAME=sigqa)))
+      ORIGIN: "*"
+      PORT: 8080
+  livestock_supplies:
+    build: ./livestock-supplies-api
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 100M
+    ports:
+      - "8082:8080"
+    environment:
+      USER: <DB_SENASA_USER>
+      PASSWORD: <DB_SENASA_PASSWORD>
+      DSN: (DESCRIPTION=(ADDRESS= (PROTOCOL=TCP)(HOST=10.0.0.73)(PORT=1521))(CONNECT_DATA=(INSTANCE_NAME=sigqa1)(SERVER=dedicated)(SERVICE_NAME=sigqa)))
+      ORIGIN: "*"
+      PORT: 8080
+  poultry_farm:
+    build: ./poultry-farm-api
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 100M
+    ports:
+      - "8083:8080"
+    environment:
+      USER: <DB_SENASA_USER>
+      PASSWORD: <DB_SENASA_PASSWORD>
+      DSN: (DESCRIPTION=(ADDRESS= (PROTOCOL=TCP)(HOST=10.0.0.73)(PORT=1521))(CONNECT_DATA=(INSTANCE_NAME=sigqa1)(SERVER=dedicated)(SERVICE_NAME=sigqa)))
+      ORIGIN: "*"
+      PORT: 8080
+  slaughterhouse:
+    build: ./slaughterhouse-api
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 100M
+    ports:
+      - "8084:8080"
+    environment:
+      USER: <DB_SENASA_USER>
+      PASSWORD: <DB_SENASA_PASSWORD>
+      DSN: (DESCRIPTION=(ADDRESS= (PROTOCOL=TCP)(HOST=10.0.0.73)(PORT=1521))(CONNECT_DATA=(INSTANCE_NAME=sigqa1)(SERVER=dedicated)(SERVICE_NAME=sigqa)))
+      ORIGIN: "*"
+      PORT: 8080
+  feed_processing:
+    build: ./feed-processing-api
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 100M
+    ports:
+      - "8085:8080"
+    environment:
+      USER: <DB_SENASA_USER>
+      PASSWORD: <DB_SENASA_PASSWORD>
+      DSN: (DESCRIPTION=(ADDRESS= (PROTOCOL=TCP)(HOST=10.0.0.73)(PORT=1521))(CONNECT_DATA=(INSTANCE_NAME=sigqa1)(SERVER=dedicated)(SERVICE_NAME=sigqa)))
+      ORIGIN: "*"
+      PORT: 8080
+  agricultural_supplies:
+    build: ./agricultural-supplies-api
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 100M
+    ports:
+      - "8086:8080"
+    environment:
+      USER: <DB_SENASA_USER>
+      PASSWORD: <DB_SENASA_PASSWORD>
+      DSN: (DESCRIPTION=(ADDRESS= (PROTOCOL=TCP)(HOST=10.0.0.73)(PORT=1521))(CONNECT_DATA=(INSTANCE_NAME=sigqa1)(SERVER=dedicated)(SERVICE_NAME=sigqa)))
+      ORIGIN: "*"
+      PORT: 8080
+  organic_certifier:
+    build: ./organic-certifier-api
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 100M
+    ports:
+      - "8087:8080"
+    environment:
+      USER: <DB_SENASA_USER>
+      PASSWORD: <DB_SENASA_PASSWORD>
+      DSN: (DESCRIPTION=(ADDRESS= (PROTOCOL=TCP)(HOST=10.0.0.73)(PORT=1521))(CONNECT_DATA=(INSTANCE_NAME=sigqa1)(SERVER=dedicated)(SERVICE_NAME=sigqa)))
+      ORIGIN: "*"
+      PORT: 8080
+  primary_processing:
+    build: ./primary-processing-api
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 100M
+    ports:
+      - "8088:8080"
+    environment:
+      USER: <DB_SENASA_USER>
+      PASSWORD: <DB_SENASA_PASSWORD>
+      DSN: (DESCRIPTION=(ADDRESS= (PROTOCOL=TCP)(HOST=10.0.0.73)(PORT=1521))(CONNECT_DATA=(INSTANCE_NAME=sigqa1)(SERVER=dedicated)(SERVICE_NAME=sigqa)))
+      ORIGIN: "*"
+      PORT: 8080
+  agricultural_exporter:
+    build: ./agricultural-exporter-api
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 100M
+    ports:
+      - "8089:8080"
+    environment:
+      USER: <DB_SENASA_USER>
+      PASSWORD: <DB_SENASA_PASSWORD>
+      DSN: (DESCRIPTION=(ADDRESS= (PROTOCOL=TCP)(HOST=10.0.0.73)(PORT=1521))(CONNECT_DATA=(INSTANCE_NAME=sigqa1)(SERVER=dedicated)(SERVICE_NAME=sigqa)))
+      ORIGIN: "*"
+      PORT: 8080
+  farm:
+    build: ./farm-api
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 100M
+    ports:
+      - "8090:8080"
+    environment:
+      USER: <DB_SENASA_USER>
+      PASSWORD: <DB_SENASA_PASSWORD>
+      DSN: (DESCRIPTION=(ADDRESS= (PROTOCOL=TCP)(HOST=10.0.0.73)(PORT=1521))(CONNECT_DATA=(INSTANCE_NAME=sigqa1)(SERVER=dedicated)(SERVICE_NAME=sigqa)))
+      ORIGIN: "*"
+      PORT: 8080
+  animal:
+    build: ./animal-api
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 100M
+    ports:
+      - "8091:8080"
+    environment:
+      USER: <DB_SENASA_USER>
+      PASSWORD: <DB_SENASA_PASSWORD>
+      DSN: (DESCRIPTION=(ADDRESS= (PROTOCOL=TCP)(HOST=10.0.0.73)(PORT=1521))(CONNECT_DATA=(INSTANCE_NAME=sigqa1)(SERVER=dedicated)(SERVICE_NAME=sigqa)))
+      ORIGIN: "*"
+      PORT: 8080
+  livestock_exporter:
+    build: ./livestock-exporter-api
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 100M
+    ports:
+      - "8092:8080"
+    environment:
+      USER: <DB_SENASA_USER>
+      PASSWORD: <DB_SENASA_PASSWORD>
+      DSN: (DESCRIPTION=(ADDRESS= (PROTOCOL=TCP)(HOST=10.0.0.73)(PORT=1521))(CONNECT_DATA=(INSTANCE_NAME=sigqa1)(SERVER=dedicated)(SERVICE_NAME=sigqa)))
+      ORIGIN: "*"
+      PORT: 8080
+  export_processing_plant:
+    build: ./export-processing-plant-api
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 100M
+    ports:
+      - "8093:8080"
+    environment:
+      USER: <DB_SENASA_USER>
+      PASSWORD: <DB_SENASA_PASSWORD>
+      DSN: (DESCRIPTION=(ADDRESS= (PROTOCOL=TCP)(HOST=10.0.0.73)(PORT=1521))(CONNECT_DATA=(INSTANCE_NAME=sigqa1)(SERVER=dedicated)(SERVICE_NAME=sigqa)))
+      ORIGIN: "*"
+      PORT: 8080

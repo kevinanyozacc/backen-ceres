@@ -1,0 +1,40 @@
+version: "3.9"
+services:
+  gateway:
+    build: ./gateway-api
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5'
+          memory: 500M
+    environment:
+      PRIVATE_KEY: <PRIVATE_KEY>
+      ORIGIN: "*"
+      PORT: 3333
+      API_USERS: http://<BACKEND_DEV_IP>:8080/api/v1/users
+      API_SEARCH: http://<BACKEND_DEV_IP>:8081/api/v1/search
+      API_LIVESTOCK_SUPPLIES: http://<BACKEND_DEV_IP>:8082/api/v1/livestock-supplies
+      API_POULTRY_FARM: http://<BACKEND_DEV_IP>:8083/api/v1/poultry-farm
+      API_SLAUGHTERHOUSE: http://<BACKEND_DEV_IP>:8084/api/v1/slaughterhouse
+      API_FEED_PROCESSING: http://<BACKEND_DEV_IP>:8085/api/v1/feed-processing
+      API_AGRICULTURAL_SUPPLIES: http://<BACKEND_DEV_IP>:8086/api/v1/agricultural-supplies
+      API_OCPO_REGISTER: http://<BACKEND_DEV_IP>:8087/api/v1/organic-certifier
+      API_PRIMARY_PROCESSING: http://<BACKEND_DEV_IP>:8088/api/v1/primary-processing
+      API_AGRICULTURAL_EXPORTER: http://<BACKEND_DEV_IP>:8089/api/v1/agricultural-exporter
+      API_FARM: http://<BACKEND_DEV_IP>:8090/api/v1/farm
+      API_ANIMAL: http://<BACKEND_DEV_IP>:8091/api/v1/animal
+      API_LIVESTOCK_EXPORTER: http://<BACKEND_DEV_IP>:8092/api/v1/livestock-exporter
+      API_EXPORT_PROCESSING_PLANT: http://<BACKEND_DEV_IP>:8093/api/v1/export-processing-plant
+      SWAGGER_URL: http://trazabilidad.senasa.gob.pe
+      TOKEN_EXPIRES: 10h
+      ADMIN_ROLE: ADMINISTRADOR
+  frontend:
+    image: frontend:latest
+    deploy:
+      resources:
+        limits:
+          cpus: '0.2'
+          memory: 200M
+    ports:
+      - "80:80"
+      - "443:443"

@@ -1,0 +1,264 @@
+{
+  "organization" : [
+    {
+      "type": "Establecimiento de insumos pecuarios",
+      "db_schema": "SIGSA",
+      "db_table": "DIP_EMPRESAS_VETERINARIO",
+      "columns": {
+        "ubigeo": {
+          "adm_1": "CODI_DEPA_DPT",
+          "adm_2": "CODI_PROV_TPR",
+          "adm_3": "CODI_DIST_TDI"
+        },
+        "sede": "CODI_SEDE_SED",
+        "name": "RAZO_SOCI_VET",
+        "ruc": "RUC_EMPR_VET",
+        "address": [
+          {
+            "name": "Dirección real",
+            "column": "DIRE_LEGA_VET"
+          },
+          {
+            "name": "Dirección legal",
+            "column": "DIRE_REAL_VET"
+          }
+        ],
+        "dates":[
+          {
+            "name": "Año",
+            "column": "ANNO_SOLI_EST"
+          },
+          {
+            "name": "Fecha de registro",
+            "column": "FECH_REGI_EMP"
+          }
+        ],
+        "other_identifiers": [
+          {
+            "name": "N° documento veterinario",
+            "column": "NUME_DOCU_VET"
+          },
+          {
+            "name": "N° registro",
+            "column": "REGI_PADR_EMP"
+          }
+        ],
+        "is_active": [
+          "ESTA_EMPR_VET" 
+        ]
+      }
+    },
+    {
+      "type": "Autorización de granja porcina",
+      "db_schema": "SIGSA",
+      "db_table": "SANITARIO_FUNCIONAMIENTO",
+      "columns": {
+        "ubigeo": {
+          "adm_1": "CODI_DEPA_DPT_ESTABLECIMIENTO",
+          "adm_2": "CODI_PROV_TPR_ESTABLECIMIENTO",
+          "adm_3": "CODI_DIST_TDI_ESTABLECIMIENTO"
+        },
+        "sede": "CODI_SEDE_SED",
+        "name": "CRAZON_SOCIAL_SOLICITANTE",
+        "ruc": "CRUC_INTERESADO",
+        "dni": "CNUMERO_DOCUMENTO_INTERESADO",
+        "address": [
+          {
+            "name": "Dirección",
+            "column": "DIRECCION_ESTABLECIMIENTO"
+          }
+        ],
+        "dates":[
+          {
+            "name": "Año",
+            "column": "CSOLICITUD_ANNO"
+          },
+          {
+            "name": "Fecha solicitud",
+            "column": "DSOLICITUD_FECHA"
+          }
+        ],
+        "other_identifiers": [
+          {
+            "name": "Código de solicitud",
+            "column": "CSOLICITUD_FUNCIONAMIENTO"
+          }, {
+            "name": "Código de expediente",
+            "column": "CNUME_EXPE_EXP"
+          }, {
+            "name": "Código del predio",
+            "column": "CODIGO_PREDIO"
+          }
+        ],
+        "categories": [
+          {
+            "name": "Particular o municipal",
+            "column": "CTIPO_PARTICULAR_MUNICIPAL"
+          }
+        ],
+        "is_active": [
+          "FAVORABLE",
+          "CESTADO_SOLICITUD"
+        ]
+      }
+    },
+    {
+      "type": "Autorización de centro de acopio o centro de faenamiento",
+      "db_schema": "SIGSA",
+      "db_table": "CENTRO_BENEFICIO_PADRON",
+      "columns": {
+        "ubigeo": {
+          "adm_1": "CODI_DEPA_CBE",
+          "adm_2": "CODI_PROV_CBE",
+          "adm_3": "CODI_DIST_CBE"
+        },
+        "sede": "CODI_SEDE_SED",
+        "name": "RAZO_SOCI_CBE",
+        "ruc": "RUC_CBEN_CBE",
+        "dni": "NUME_DOCU_IDE",
+        "address": [
+          {
+            "name": "Dirección",
+            "column": "DIRE_CBEN_CBE"
+          },
+          {
+            "name": "Localidad",
+            "column": "LOCA_CBEN_CBE"
+          }
+        ],
+        "geolocation": [
+          {
+            "lat": "GEOGRAFICA_LATITUD",
+            "long": "GEOGRAFICA_LONGITUD"
+          },
+          {
+            "lat": "LATI_CENT_BEN",
+            "long": "LONG_CENT_BEN"
+          }
+        ],
+        "dates":[
+          {
+            "name": "Fecha solicitud",
+            "column": "FECH_CREA"
+          }
+        ],
+        "other_identifiers": [
+          {
+            "name": "Código de autorización",
+            "column": "CODI_AUTO_CBE"
+          },
+          {
+            "name": "Código único",
+            "column": "CODI_CBEN_CBE"
+          },
+          {
+            "name": "Código de veterinario",
+            "column": "CODI_MEDI_VET"
+          }
+        ],
+        "categories": [
+          {
+            "name": "Tipo",
+            "column": "CATE_CENT_BEN"
+          }
+        ],
+        "is_active": [
+          "ESTA_ACTI_CBE"
+        ]
+      }
+    },
+    {
+      "type": "Procesamiento de piensos",
+      "db_schema": "SIGIA",
+      "db_table": "PIE_SOL_SANITARIO_DATOS",
+      "columns": {
+        "ubigeo": {
+          "adm_1": "DEPARTAMENTO_ID",
+          "adm_2": "PROVINCIA_ID",
+          "adm_3": "DISTRITO_ID"
+        },
+        "name": "RAZON_SOCIAL",
+        "ruc": "RUC",
+        "address": [
+          {
+            "name": "Dirección empresa",
+            "column": "DIRECCION_ESTABLECIMIENTO"
+          },
+          {
+            "name": "Dirección",
+            "column": "ESTABLECIMIENTO_DIRECCION"
+          }
+        ],
+        "other_identifiers": [
+          {
+            "name": "Código de solicitud",
+            "column": "SOLICITUD_ID"
+          },
+          {
+            "name": "N° colegiatura",
+            "column": "PR_NRO_COLEGIATURA"
+          },
+          {
+            "name": "RUC Profesional responsable",
+            "column": "RUC_PROFESIONAL"
+          }
+        ]
+      }
+    },
+    {
+      "type": "Empresas de Insumos Agrícolas",
+      "db_schema": "SIGSVE",
+      "db_table": "REGISTRO_EMPRESA_GIRO",
+      "columns": {
+        "ubigeo": {
+          "adm_1": "CODI_DEPA_DPT",
+          "adm_2": "CODI_PROV_TPR",
+          "adm_3": "CODI_DIST_TDI"
+        },
+        "sede": "CODI_SEDE_SED",
+        "name": "RAZO_SOCI_EMP",
+        "ruc": "NRUC_EMPR_EMP",
+        "address": [
+          {
+            "name": "Dirección",
+            "column": "DIRE_LEGA_EMP"
+          }
+        ],
+        "dates":[
+          {
+            "name": "Año",
+            "column": "ANNO_SOLI_EMP"
+          },
+          {
+            "name": "Fecha solicitud",
+            "column": "FECH_CREA"
+          }
+        ],
+        "other_identifiers": [
+          {
+            "name": "N° Expediente",
+            "column": "NUME_EXPE_EXP"
+          },
+          {
+            "name": "N° Registro",
+            "column": "NUME_REGI_EMP"
+          },
+          {
+            "name": "N° Solicitud",
+            "column": "NUME_SOLI_EMP"
+          }
+        ],
+        "categories": [
+          {
+            "name": "Giro",
+            "column": "GIRO_EMPR_EMP"
+          },
+          {
+            "name": "Tipo de plaguicida",
+            "column": "TIPO_EMPRESA"
+          }
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,95 @@
+const oracle = require("../../config/db"),
+  logger = require("../utils/logger"),
+  utils = require("../utils/utils");
+
+const SCHEMA = "SIGSA",
+  TABLE = "SAC_ESTABLECIMIENTO_REGISTRO",
+  SCHEMA_PERSON = "SISTEMAS",
+  TABLE_PERSON = "PERSONA",
+  TABLE_EXPORTER_CAMPAIGN = "SAC_ESTABLECIMIENTO_EXPORTADOR";
+ATTR = {
+  TYPE: ["TYPE_", "type"],
+  ID: ["ID", "id"],
+  CODIGO_USUARIO: ["CODIGO_USUARIO", "user_code"],
+  NAME: ["NAME", "name"],
+  CONTACT_PERSON: ["CONTACT_PERSON", "contact_person"],
+  RUC: ["RUC", "ruc"],
+  DNI: ["DNI", "dni"],
+  DEPARTAMENTO: ["DEPARTAMENTO", "department"],
+  PROVINCIA: ["PROVINCIA", "province"],
+  DISTRITO: ["DISTRITO", "district"],
+  HQ: ["HQ", "hq"],
+  ADDRESS_REAL: ["ADDRESS_REAL", "address_real"],
+  ADDRESS_LEGAL: ["ADDRESS_LEGAL", "address_legal"],
+  LINE: ["LINE", "line"],
+  CATEGORY: ["CATEGORY", "category"],
+  YEAR: ["YEAR_", "year"],
+  START_DATE: ["START_DATE", "start_date"],
+  END_DATE: ["END_DATE", "end_date"],
+  FECH_MODI: ["FECH_MODI", "fech_modi"],
+  TELEFONO: ["TELEFONO", "phone"],
+  TELEFONO_MOVIL: ["TELEFONO_MOVIL", "mobile_phone"],
+};
+
+const getByID = async (id, cols) => {
+  let result, qry, db;
+  const AUX_TABLE = "D";
+  qry = `SELECT `;
+  qry += await utils.makeSelect(cols, AUX_TABLE, ATTR);
+  qry += `FROM (
+            SELECT 
+            'livestock-exporter' AS "TYPE_",
+            C.CODIGO_ESTABLECIMIENTO AS "ID",
+            C.NOMBRE_ESTABLECIMIENTO AS "NAME",
+            CAST(EXTRACT(YEAR FROM C.FECH_CREA) AS CHAR(4)) AS "YEAR_",
+            CASE WHEN TIPOS_EXPLOTACION_ANIMAL.DESC_EXPL_ANI IS NULL THEN C.ESTABLECIMIENTO_EXPORTADOR ELSE TIPOS_EXPLOTACION_ANIMAL.DESC_EXPL_ANI END AS "LINE",
+            C.FECH_CREA AS "START_DATE",
+            NULL AS "END_DATE",
+            C.FECH_MODI AS "FECH_MODI",
+            C.DIRECCION AS "ADDRESS_REAL",
+            C.CODI_DEPA_DPT AS "DEPARTAMENTO",
+            C.CODI_PROV_TPR AS "PROVINCIA",
+            C.CODI_DIST_TDI AS "DISTRITO",
+            C.CODI_SEDE_SED AS "HQ",
+            CASE WHEN C.TIPO_ESTABLECIMIENTO = 'G' THEN 'Granja' ELSE CASE WHEN C.TIPO_ESTABLECIMIENTO = 'P' THEN 'Planta de incubación' ELSE CASE WHEN C.TIPO_ESTABLECIMIENTO = 'E' THEN 'Exportadora' ELSE CASE WHEN C.TIPO_ESTABLECIMIENTO = '21' THEN 'Apicultura' ELSE 'Otro' END END END END AS "CATEGORY",
+            PERSONA.PERSONA_ID AS "CODIGO_USUARIO",
+            PERSONA.NOMBRES AS "CONTACT_PERSON",
+            PERSONA.TELEFONO AS "TELEFONO", 
+            PERSONA.TELEFONO_MOVIL AS "TELEFONO_MOVIL",
+            PERSONA.DIRECCION AS "ADDRESS_LEGAL",
+            CASE WHEN C.TIPO_DOCUMENTO = '04' AND C.NUMERO_DOCUMENTO IS NOT NULL THEN C.NUMERO_DOCUMENTO ELSE CASE WHEN PERSONA.RUC IS NOT NULL THEN PERSONA.RUC ELSE PERSONA.DOCUMENTO_NUMERO END END AS "RUC",
+            CASE WHEN C.TIPO_DOCUMENTO = '01' AND C.NUMERO_DOCUMENTO IS NOT NULL THEN C.NUMERO_DOCUMENTO ELSE CASE WHEN PERSONA.DOCUMENTO_TIPO = '01' THEN PERSONA.DOCUMENTO_NUMERO ELSE NULL END END AS "DNI"
+        FROM (SELECT SAC_ESTABLECIMIENTO_REGISTRO.*, B.CODIGO_USUARIO
+        FROM SIGSA.SAC_ESTABLECIMIENTO_REGISTRO LEFT JOIN (SELECT SAC_ESTABLECIMIENTO_EXPORTADOR.CODIGO_ESTABLECIMIENTO, MAX(SAC_ESTABLECIMIENTO_EXPORTADOR.CODIGO_USUARIO) CODIGO_USUARIO
+        FROM SIGSA.SAC_ESTABLECIMIENTO_EXPORTADOR
+        GROUP BY SAC_ESTABLECIMIENTO_EXPORTADOR.CODIGO_ESTABLECIMIENTO) B
+        ON B.CODIGO_ESTABLECIMIENTO = SAC_ESTABLECIMIENTO_REGISTRO.CODIGO_ESTABLECIMIENTO) C LEFT JOIN PERSONA ON PERSONA.PERSONA_ID = C.CODIGO_USUARIO
+        LEFT JOIN TIPOS_EXPLOTACION_ANIMAL ON C.TIPO_EXPL_ANI = TIPOS_EXPLOTACION_ANIMAL.TIPO_EXPL_ANI
+        ) ${AUX_TABLE} `;
+
+  qry += `WHERE ${AUX_TABLE}.ID=:id`;
+
+  try {
+    db = await oracle.connect();
+    result = await db.execute(qry, [id], { outFormat: 4002 });
+  } catch (err) {
+    logger.error(err);
+  } finally {
+    if (db) {
+      try {
+        await db.close();  // always release the connection back to the pool
+      } catch (err) {
+        console.error(err);
+      }
+    }
+  }
+
+  return result;
+};
+
+module.exports = {
+  getByID,
+  SCHEMA,
+  TABLE,
+  ATTR,
+};

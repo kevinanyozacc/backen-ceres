@@ -1,0 +1,4254 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "0.0.1",
+    "title": "SENASA Trazabilidad",
+    "description": "API para proyecto SENASA Trazabilidad"
+  },
+  "servers": [
+    {
+      "url": "http://host/api/v1",
+      "description": "Digital Ocean Server"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Users",
+      "description": "Información del usuario",
+      "externalDocs": {
+        "description": "Find out more",
+        "url": "http://swagger.io"
+      }
+    }
+  ],
+  "paths": {
+    "/farm/{id}": {
+      "get": {
+        "tags": ["Predios"],
+        "summary": "Trae datos de predios",
+        "description": "Trae predios según ID de sistema de mosca de la fruta",
+        "operationId": "estate-public",
+        "security": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identificador de predio (farm_id: CODIGO SEDE + CODIGO PRODUCTOR + CODIGO PREDIO)",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "0160006801"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/FarmPublic"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/farm/ecas/{id}": {
+      "get": {
+        "tags": ["Predios"],
+        "summary": "Trae datos de ECAS de un predio",
+        "description": "Trae ECAS según ID de sistema de mosca de la fruta",
+        "operationId": "estate-ecas-public",
+        "security": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Identificador de predio (farm_id: CODIGO SEDE + CODIGO PRODUCTOR + CODIGO PREDIO)",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "0160006801"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ECASFarmPublic"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/agricultural-exporter/{id}": {
+      "get": {
+        "tags": ["Exporter"],
+        "summary": "Trae datos de establecimientos exportadores de productos agrícolas",
+        "description": "Trae establecimiento exportador según ID",
+        "operationId": "agricultural-exporter-public",
+        "security": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID a ser buscado [CODI_CERT_PLA]",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "023201600001"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgriculturalExporterPublic"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/agricultural-exporter/certificates/agricultural-exporter/{id}": {
+      "get": {
+        "tags": ["Exporter"],
+        "summary": "Obtiene los certificados fitosanitarios de exportación agrícolas.",
+        "description": "Obtiene los certificados fitosanitarios de exportación agrícolas  solicitados por una exportadora con código id",
+        "operationId": "agricultural-exporter-certificates",
+        "security": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID de la exportadora que solicitó los certificados [PERSONA_ID]",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "01117473"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgriculturalExporterCertificatesPublic"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/agricultural-exporter/certificates/farm/{id}": {
+      "get": {
+        "tags": ["Exporter"],
+        "summary": "Obtiene los certificados fitosanitarios de exportación agrícolas según ID de predio.",
+        "description": "Obtiene los certificados fitosanitarios de exportación agrícolas de los últimos dos años solicitados por una exportadora según ID de predio de los certificados de lugar de producción relacionados",
+        "operationId": "agricultural-exporter-certificates-by-farm_id",
+        "security": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID del predio (Mosca de la fruta) (farm_id: CODIGO SEDE + CODIGO PRODUCTOR + CODIGO PREDIO)",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "0263851001"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgriculturalExporterCertificatesPublic"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/agricultural-exporter/certificates/export-processing-plant/{id}": {
+      "get": {
+        "tags": ["Exporter"],
+        "summary": "Obtiene los certificados fitosanitarios de exportación agrícolas según ID de la planta.",
+        "description": "Obtiene los certificados fitosanitarios de exportación agrícolas de los últimos 10 meses solicitados por una exportadora según ID de planta de empaque, tratamiento o centro de inspección por el que pasó el producto. Retorna máximo 100",
+        "operationId": "agricultural-exporter-certificates-by-plant_id",
+        "security": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID de la planta [PERSONA_ID]",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "010201600009"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgriculturalExporterCertificatesPublic"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/agricultural-exporter/origin-certificates/{id}": {
+      "get": {
+        "tags": ["Exporter"],
+        "summary": "Obtiene los certificados de lugar de producción de un predio.",
+        "description": "Obtiene los certificados de lugar de producción de un predio, junto a los productos certificados para exportación",
+        "operationId": "origin-certificates",
+        "security": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID del predio (Mosca de la fruta) (farm_id: CODIGO SEDE + CODIGO PRODUCTOR + CODIGO PREDIO)",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "0280190001"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgriculturalExporterCertificatesPublic"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/livestock-exporter/{id}": {
+      "get": {
+        "tags": ["Exporter"],
+        "summary": "Trae datos de establecimientos exportadores de productos y subproductos animales",
+        "description": "Trae establecimiento exportador según ID",
+        "operationId": "livestock-exporter-public",
+        "security": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID a ser buscado [CODIGO_SOLICITUD]",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "0000001045"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LivestockExporterPublic"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/export-processing-plant/{id}": {
+      "get": {
+        "tags": ["Plants"],
+        "summary": "Trae datos de plantas y centros de inspección certificadas según ID",
+        "description": "Trae datos de plantas de tratamiento (PT), plantas empacadoras (PE), plantas de tratamiento y empaque (PTE), centros de inspección (CI) y plantas de embalaje de madera (EM)",
+        "operationId": "export-processing-plant-public",
+        "security": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID a ser buscado [PERSONA_ID]",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "023201600001"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ExportProcessingPlantPublic"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/primary-processing/{id}": {
+      "get": {
+        "tags": ["Plants"],
+        "summary": "Trae datos de establecimientos de procesamiento primario",
+        "description": "Trae establecimiento de procesamiento primario según ID",
+        "operationId": "primary-processing-public",
+        "security": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID a ser buscado [REGISTRO_ID]",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "123"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PrimaryProcessingPublic"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/organic-certifier/{id}": {
+      "get": {
+        "tags": ["Organic Certifier"],
+        "summary": "Trae establecimiento Organismo certificador de productos orgánicos (OCPO)",
+        "description": "Trae establecimiento OCPO según ID",
+        "operationId": "ocpo-register-public",
+        "security": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID a ser buscado [registro_id]",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "12"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OcpoPublic"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/agricultural-supplies/{id}": {
+      "get": {
+        "tags": ["Agricultural Supplies"],
+        "summary": "Trae empresa registradas según ID",
+        "description": "Trae empresa registradas según ID",
+        "operationId": "agricultural-supplies-public",
+        "security": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID a ser buscado [NUME_SOLI_EMP]",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "004200000006"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AgriculturalSupplies"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/feed-processing/{id}": {
+      "get": {
+        "tags": ["Plants"],
+        "summary": "Trae la solicitud de sanitario según el ID de solicitud",
+        "description": "Trae la autorización sanitaria de establecimiento dedicada al procesamiento primario de alimentos agropecuarios y piensos según el ID de solicitud",
+        "operationId": "feed-processing-public",
+        "security": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID a ser buscado [SOLICITUD_ID]",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "83"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SolSanitarioPublic"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/poultry-farm/{id}": {
+      "get": {
+        "tags": ["Poultry Farm"],
+        "summary": "Trae los datos de granjas avícolas autorizadas según su ID",
+        "description": "Trae los datos de granjas avícolas autorizadas según su ID",
+        "operationId": "poultry-farm-public",
+        "security": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID a ser buscado [CSOLICITUD_FUNCIONAMIENTO]",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "000000000160"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PoultryFarm"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/slaughterhouse/{id}": {
+      "get": {
+        "tags": ["Slaughterhouse"],
+        "summary": "Trae el centro de beneficio según ID",
+        "description": "Trae lael centro de beneficio según ID",
+        "operationId": "slaughterhouse-public",
+        "security": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID a ser buscado [codi_cben_cbe]",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000086"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CentroBeneficioPublic"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/slaughterhouse/auth/{id}": {
+      "get": {
+        "tags": ["Slaughterhouse"],
+        "summary": "Obtiene las autorizaciones de este tipo de establecimiento.",
+        "description": "Obtiene las autorizaciones de un matadero, centro de beneficio, frigorífico o rendering.",
+        "operationId": "slaughterhouse-auth",
+        "security": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID del establecimiento a ser buscado [codi_cben_cbe]",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000066"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AuthSlaughterhousePublic"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/slaughterhouse/csti/{id}": {
+      "get": {
+        "tags": ["Slaughterhouse"],
+        "summary": "Obtiene los CSTI asociados a este tipo de establecimiento.",
+        "description": "Obtiene los CSTI asociados a un matadero, centro de beneficio, frigorífico o rendering.",
+        "operationId": "slaughterhouse-csti",
+        "security": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID del establecimiento a ser buscado [codi_cben_cbe]",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "00000486"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CSTISlaughterhousePublic"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/livestock-supplies/{id}": {
+      "get": {
+        "tags": ["Livestock Supplies"],
+        "summary": "Trae la empresa veterinaria según ID",
+        "description": "Trae la empresa veterinaria según ID",
+        "operationId": "livestock-supplies-public",
+        "security": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID a ser buscado [regi_padr_emp]",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "00001985"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VetCoPublic"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/animal/{id}": {
+      "get": {
+        "tags": ["Animal"],
+        "summary": "Trae información del animal según ID",
+        "description": "Trae información del animal según ID",
+        "operationId": "animal-public",
+        "security": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "ID a ser buscado [ididen,  secuencial, secuencial_arete]",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "111"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnimalPublic"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/animal/farm/{id}": {
+      "get": {
+        "tags": ["Animal"],
+        "summary": "Trae lista de animales en un predio",
+        "description": "Trae información de los animales que han estados asociados al predio. Si high_low es B el animal ha sido dado de baja.",
+        "operationId": "animal-farm-public",
+        "security": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Código de predio (CODIGO SEDE + CODIGO PRODUCTOR + CODIGO PREDIO)",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "0280000702"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnimalPublic"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/animal/earring/{id}": {
+      "get": {
+        "tags": ["Animal"],
+        "summary": "Trae información del animal según código del arete",
+        "description": "Trae información del animal según código del arete",
+        "operationId": "animal-earring-public",
+        "security": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Código en código de barras del arete",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "14030005041"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AnimalPublic"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/animal/events/{id}": {
+      "get": {
+        "tags": ["Animal"],
+        "summary": "Trae información de eventos del animal según ID",
+        "description": "Trae información del animal según ID",
+        "operationId": "animal-events-public",
+        "security": [],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Código del arete (cod_arete)",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "111"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/EventAnimalPublic"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/animal/events": {
+      "post": {
+        "tags": ["Animal"],
+        "summary": "Guarda evento de lectura de código de arete.",
+        "description": "Guarda evento de lectura de código de arete, donde id es el código del arete.",
+        "operationId": "animal-save-event",
+          "requestBody": {
+            "description": "event",
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RegisterEvent"
+                },
+                "example": {
+                  "earring_id": "PESENASABO0508-0005984",
+                  "lat": -15.5894295,
+                  "long": -73.1013068,
+                  "comment": "prueba",
+                  "cod_company": "10000107",
+                  "type_company":"slaughterhouse",
+                  "hq": "024",
+                  "user_id": "0000000000",
+                  "user_name": "pruebalina"
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Message"
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Message"
+                  }
+                }
+              }
+            },
+            "500": {
+              "description": "",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "$ref": "#/components/schemas/Message"
+                  }
+                }
+              }
+            }
+          }
+        }
+    },
+    "/search/stats": {
+      "get": {
+        "tags": ["Search"],
+        "summary": "Estadísticas del sistema de trazabilidad",
+        "description": "Busca las estadísticas a mostrar en la página principal",
+        "operationId": "search-stats",
+        "security": [],
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchStats"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Error en el servidor",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/search/company": {
+      "get": {
+        "tags": ["Search"],
+        "summary": "Buscador",
+        "description": "Busca por cualquier campo",
+        "operationId": "search-company",
+        "security": [],
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "Valor a ser buscado",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "AVICOLA RIO"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchCompany"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/search/farm": {
+      "get": {
+        "tags": ["Search"],
+        "summary": "Buscador",
+        "description": "Busca por cualquier campo",
+        "operationId": "search-farm",
+        "security": [],
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "Valor a ser buscado",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "Don Nato"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchFarm"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/search/animal": {
+      "get": {
+        "tags": ["Search"],
+        "summary": "Buscador",
+        "description": "Busca por cualquier campo",
+        "operationId": "search-animal",
+        "security": [],
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "description": "Valor a ser buscado",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "PE SENASA PO1403-0005045"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchAnimal"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/registered/newly": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Show all newly users registered",
+        "description": "Show all users registered with status 0",
+        "operationId": "user-registered-newly",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/{user}": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Trae información del usuario según username",
+        "description": "Trae información del usuario según username",
+        "operationId": "user",
+        "parameters": [
+          {
+            "name": "user",
+            "in": "path",
+            "description": "Username a buscar",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "jpastor"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Register"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/user/grant": {
+      "patch": {
+        "tags": ["Users"],
+        "summary": "Admin grant",
+        "description": "Admin grant",
+        "operationId": "user-grant",
+        "requestBody": {
+          "description": "Username",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Register"
+              },
+              "example": {
+                "username": "acasas"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/signup/public": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "Registro de usuario para público general",
+        "description": "Registra a un usuario",
+        "operationId": "signup-public",
+        "security": [],
+        "requestBody": {
+          "description": "Datos del usuario",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Register"
+              },
+              "example": {
+                "email": "email@email.com",
+                "password": "pass1234",
+                "password_confirmation": "pass1234",
+                "firstname": "armando",
+                "lastname": "casas",
+                "username": "acasas",
+                "dni": "12345678k"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/signup/admin": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "Registro de usuario desde panel de administración",
+        "description": "Registra a un usuario",
+        "operationId": "signup-admin",
+        "requestBody": {
+          "description": "Datos del usuario",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Register"
+              },
+              "example": {
+                "email": "email@email.com",
+                "password": "pass1234",
+                "password_confirmation": "pass1234",
+                "firstname": "armando",
+                "lastname": "casas",
+                "username": "acasas",
+                "dni": "12345678k",
+                "role_id": 4
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "tags": ["Users"],
+        "summary": "Autenticación de usuario",
+        "description": "Autentica a un usuario utilizando las credenciales proporcionadas",
+        "operationId": "login",
+        "security": [],
+        "requestBody": {
+          "description": "Credenciales del usuario",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["user", "password"],
+                "properties": {
+                  "user": {
+                    "type": "string"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "user": "brownie",
+                "password": "bulu123"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Token"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/whoami": {
+      "get": {
+        "tags": ["Users"],
+        "summary": "Obtener información del usuario",
+        "description": "Obtener información del usuario logueado",
+        "operationId": "whoami",
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/User"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Message"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Message": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": ""
+          }
+        }
+      },
+      "Token": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": ""
+          },
+          "token": {
+            "type": "string",
+            "description": ""
+          }
+        }
+      },
+      "User": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": ""
+          },
+          "user": {
+            "type": "object",
+            "properties": {
+              "user_id": {
+                "type": "integer",
+                "description": ""
+              },
+              "role": {
+                "type": "string",
+                "description": ""
+              },
+              "dni": {
+                "type": "string",
+                "description": ""
+              },
+              "firstname": {
+                "type": "string",
+                "description": ""
+              },
+              "lastname": {
+                "type": "string",
+                "description": ""
+              },
+              "email": {
+                "type": "string",
+                "description": ""
+              }
+            }
+          }
+        }
+      },
+      "SearchStats": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": ""
+          },
+          "total": {
+            "type": "integer",
+            "description": ""
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "STAT": {
+                  "type": "string",
+                  "description": "Tipo de estadística"
+                },
+                "N": {
+                  "type": "string",
+                  "description": "Cantidad"
+                }
+              }
+            }
+          }
+        }
+      },
+      "SearchCompany": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": ""
+          },
+          "total": {
+            "type": "integer",
+            "description": ""
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "ubigeo": {
+                  "type": "string",
+                  "description": ""
+                },
+                "department": {
+                  "type": "string",
+                  "description": ""
+                },
+                "province": {
+                  "type": "string",
+                  "description": ""
+                },
+                "district": {
+                  "type": "string",
+                  "description": ""
+                },
+                "hq": {
+                  "type": "string",
+                  "description": ""
+                },
+                "name": {
+                  "type": "string",
+                  "description": ""
+                },
+                "ruc": {
+                  "type": "string",
+                  "description": ""
+                },
+                "dni": {
+                  "type": "string",
+                  "description": ""
+                },
+                "address_legal": {
+                  "type": "string",
+                  "description": ""
+                },
+                "address_real": {
+                  "type": "string",
+                  "description": ""
+                },
+                "location": {
+                  "type": "string",
+                  "description": ""
+                },
+                "geo_lat": {
+                  "type": "string",
+                  "description": ""
+                },
+                "geo_long": {
+                  "type": "string",
+                  "description": ""
+                },
+                "cent_lat": {
+                  "type": "string",
+                  "description": ""
+                },
+                "cent_long": {
+                  "type": "string",
+                  "description": ""
+                },
+                "year": {
+                  "type": "string",
+                  "description": ""
+                },
+                "date": {
+                  "type": "string",
+                  "description": ""
+                },
+                "document_code": {
+                  "type": "string",
+                  "description": ""
+                },
+                "id": {
+                  "type": "string",
+                  "description": ""
+                },
+                "tuition_code": {
+                  "type": "string",
+                  "description": ""
+                },
+                "ruc_professional": {
+                  "type": "string",
+                  "description": ""
+                },
+                "file_code": {
+                  "type": "string",
+                  "description": ""
+                },
+                "estate_code": {
+                  "type": "string",
+                  "description": ""
+                },
+                "auth_code": {
+                  "type": "string",
+                  "description": ""
+                },
+                "vet_code": {
+                  "type": "string",
+                  "description": ""
+                },
+                "request_code": {
+                  "type": "string",
+                  "description": ""
+                },
+                "line": {
+                  "type": "string",
+                  "description": ""
+                },
+                "category": {
+                  "type": "string",
+                  "description": ""
+                },
+                "state": {
+                  "type": "string",
+                  "description": ""
+                },
+                "is_active": {
+                  "type": "string",
+                  "description": ""
+                },
+                "type": {
+                  "type": "string",
+                  "description": ""
+                }
+              }
+            }
+          }
+        }
+      },
+      "SearchFarm": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": ""
+          },
+          "total": {
+            "type": "integer",
+            "description": ""
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Identificador de predio"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "Nombre del predio"
+                },
+                "hq": {
+                  "type": "string",
+                  "description": "Código de sede"
+                },
+                "department": {
+                  "type": "string",
+                  "description": "Código de departamento"
+                },
+                "district": {
+                  "type": "string",
+                  "description": "Código de distrito"
+                },
+                "province": {
+                  "type": "string",
+                  "description": "Código de provincia"
+                },
+                "state": {
+                  "type": "string",
+                  "description": "Estado del registro ('A' activo, 'I' inactivo)"
+                },
+                "geo_lat": {
+                  "type": "string",
+                  "description": "Latitud"
+                },
+                "geo_long": {
+                  "type": "string",
+                  "description": "Longitud"
+                },
+                "start_date": {
+                  "type": "string",
+                  "description": "Fecha de creación del registro"
+                },
+                "fech_modi": {
+                  "type": "string",
+                  "description": "Última modificación"
+                },
+                "year": {
+                  "type": "string",
+                  "description": "Año de registro"
+                },
+                
+                "farmer_name": {
+                  "type": "string",
+                  "description": "Nombre del productor"
+                },
+                "farmer_dni": {
+                  "type": "string",
+                  "description": "DNI del productor"
+                },
+                "farmer_ruc": {
+                  "type": "string",
+                  "description": "RUC de la empresa del productor"
+                }
+              }
+            }
+          }
+        }
+      },
+      "SearchAnimal": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": ""
+          },
+          "total": {
+            "type": "integer",
+            "description": ""
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "codi_pred_pre": {
+                  "type": "string",
+                  "description": ""
+                },
+                "codi_sede_sed": {
+                  "type": "string",
+                  "description": ""
+                },
+                "nomb_pred_pre": {
+                  "type": "string",
+                  "description": ""
+                },
+                "codi_depa_pro": {
+                  "type": "string",
+                  "description": ""
+                },
+                "codi_prov_pro": {
+                  "type": "string",
+                  "description": ""
+                },
+                "codi_dist_pro": {
+                  "type": "string",
+                  "description": ""
+                },
+                "tele_prop_pre": {
+                  "type": "string",
+                  "description": ""
+                },
+                "celu_prop_pre": {
+                  "type": "string",
+                  "description": ""
+                },
+                "email_prop_pre": {
+                  "type": "string",
+                  "description": ""
+                },
+                "user_crea": {
+                  "type": "string",
+                  "description": ""
+                },
+                "fech_crea": {
+                  "type": "string",
+                  "description": ""
+                },
+                "user_modi": {
+                  "type": "string",
+                  "description": ""
+                },
+                "fech_modi": {
+                  "type": "string",
+                  "description": ""
+                },
+                "codi_prod_pro": {
+                  "type": "string",
+                  "description": ""
+                },
+                "direccion": {
+                  "type": "string",
+                  "description": ""
+                },
+                "latid_dec_pre": {
+                  "type": "integer",
+                  "description": ""
+                },
+                "long_dec_pre": {
+                  "type": "integer",
+                  "description": ""
+                },
+                "codi_empl_per": {
+                  "type": "string",
+                  "description": ""
+                },
+                "nomb_prod_pro": {
+                  "type": "string",
+                  "description": ""
+                },
+                "dire_prod_pro": {
+                  "type": "string",
+                  "description": ""
+                },
+                "ruc_prod_pro": {
+                  "type": "string",
+                  "description": ""
+                },
+                "type": {
+                  "type": "string",
+                  "description": ""
+                }
+              }
+            }
+          }
+        }
+      },
+      "VetCoPublic": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": ""
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "anno_soli_est": {
+                  "type": "string",
+                  "description": "Año de solicitud"
+                },
+                "codi_depa_dpt": {
+                  "type": "string",
+                  "description": "Código de departamento"
+                },
+                "codi_dist_tdi": {
+                  "type": "string",
+                  "description": "Código de distrito"
+                },
+                "codi_prov_tpr": {
+                  "type": "string",
+                  "description": "Código de provincia"
+                },
+                "codi_sede_sed": {
+                  "type": "string",
+                  "description": "Código de sede"
+                },
+                "flag_dist_vet": {
+                  "type": "string",
+                  "description": "Distribuidora"
+                },
+                "flag_enva_vet": {
+                  "type": "string",
+                  "description": "Envasadora"
+                },
+                "flag_expe_vet": {
+                  "type": "string",
+                  "description": "Comercializadora"
+                },
+                "flag_expo_vet": {
+                  "type": "string",
+                  "description": "Exportadora"
+                },
+                "flag_fabr_ali": {
+                  "type": "string",
+                  "description": "Alimentos, premezclas, aditivos (Subtipo de fármacos)"
+                },
+                "flag_fabr_alimed": {
+                  "type": "string",
+                  "description": "Alimentos médicados (Subtipo de fármacos)"
+                },
+                "flag_fabr_bio": {
+                  "type": "string",
+                  "description": "Biológicos (Subtipo de fármacos)"
+                },
+                "flag_fabr_far": {
+                  "type": "string",
+                  "description": "Fármacos (Si es que entre los productos que maneja hay fármacos)"
+                },
+                "flag_fabr_vet": {
+                  "type": "string",
+                  "description": "Fabricante"
+                },
+                "flag_impo_vet": {
+                  "type": "string",
+                  "description": "Importador"
+                },
+                "nume_docu_vet": {
+                  "type": "string",
+                  "description": "DNI veterinario"
+                },
+                "razo_soci_vet": {
+                  "type": "string",
+                  "description": "Razón social"
+                },
+                "regi_padr_emp": {
+                  "type": "string",
+                  "description": "Código único de documento"
+                },
+                "ruc_empr_vet": {
+                  "type": "string",
+                  "description": "RUC"
+                },
+                "tipo_docu_ide": {
+                  "type": "string",
+                  "description": "Tipo de documento"
+                }
+              }
+            }
+          }
+        }
+      },
+      "AnimalPublic": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": ""
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "description": "tipo"
+                },
+                "id": {
+                  "type": "string",
+                  "description": "Identificador único, compuesto por: ididen,secuencial,secuencial_arete"
+                },
+                "ididen": {
+                  "type": "integer",
+                  "description": "Código de identificación"
+                },
+                "secuencial": {
+                  "type": "integer",
+                  "description": "Código secuencial para el registro de animales"
+                },
+                "secuencial_arete": {
+                  "type": "integer",
+                  "description": "Código secuencial de arete"
+                },
+                "cod_arete": {
+                  "type": "string",
+                  "description": "Código arete"
+                },
+                "gender": {
+                  "type": "string",
+                  "description": "Sexo"
+                },
+                "age": {
+                  "type": "integer",
+                  "description": "Edad"
+                },
+                "high_low": {
+                  "type": "string",
+                  "description": "Alta o baja. Los motivos de alta son por nuevos ingresos a la explotación o nacimientos posteriores a la identificación oficialLos motivos de baja son por muerte, pérdida o sustracción del animal."
+                },
+                "animal_specie": {
+                  "type": "string",
+                  "description": "Especie animal"
+                },
+                "codi_pred_pre": {
+                  "type": "string",
+                  "description": "Código único de predios"
+                },
+                "nomb_pred_pre": {
+                  "type": "string",
+                  "description": "Razón social de predios"
+                },
+                "codi_depa_pro": {
+                  "type": "string",
+                  "description": "Código de departamento de padrón de productores"
+                },
+                "codi_prov_pro": {
+                  "type": "string",
+                  "description": "Código de provincia de padrón de productores"
+                },
+                "codi_dist_pro": {
+                  "type": "string",
+                  "description": "Código de distrito de padrón de productores"
+                },
+                "tele_prop_pre": {
+                  "type": "string",
+                  "description": "Teléfono fijo"
+                },
+                "celu_prop_pre": {
+                  "type": "string",
+                  "description": "Teléfono celular"
+                },
+                "email_prop_pre": {
+                  "type": "string",
+                  "description": "Correo electrónico"
+                },
+                "direccion": {
+                  "type": "string",
+                  "description": "Dirección"
+                },
+                "ididen_1": {
+                  "type": "integer",
+                  "description": "Código de identificación"
+                },
+                "secuencial_1": {
+                  "type": "integer",
+                  "description": "Código secuencial para el registro de animales"
+                },
+                "codi_sede_sed": {
+                  "type": "string",
+                  "description": "Código de sede"
+                },
+                "codi_empl_per": {
+                  "type": "string",
+                  "description": "Código de empleado"
+                },
+                "nomb_prod_pro": {
+                  "type": "string",
+                  "description": "Razón social de productores"
+                },
+                "dire_prod_pro": {
+                  "type": "string",
+                  "description": "Dirección de productores"
+                },
+                "ruc_prod_pro": {
+                  "type": "string",
+                  "description": "RUC"
+                },
+                "ididen_2": {
+                  "type": "integer",
+                  "description": "Código de identificación"
+                }
+              }
+            }
+          }
+        }
+      },
+      "EventAnimalPublic": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Lista de eventos del animal ordenada por fecha"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "description": "Tipo de evento: csti (certificado de tránsito interno), lectura de código, otros."
+                },
+                "user_id": {
+                  "type": "string",
+                  "description": "ID persona responsable del registro. En caso de lectura, el usuario que está autenticado. En caso del CSTI del que solicita el certificado."
+                },
+                "user_name": {
+                  "type": "string",
+                  "description": "Nombre responsable del registro. En caso de lectura, el usuario que está autenticado. En caso del CSTI del que solicita el certificado."
+                },
+                "geo_lat": {
+                  "type": "string",
+                  "description": "Geolocalización disponible en caso de lectura de código del arete. Si es tipo csti, es null."
+                },
+                "geo_long": {
+                  "type": "string",
+                  "description": "Geolocalización disponible en caso de lectura de código del arete. Si es tipo csti, es null."
+                },
+                "contact_person_dni": {
+                  "type": "string",
+                  "description": "DNI de la persona natural responsable en caso de CSTI."
+                },
+                "contact_person_type": {
+                  "type": "string",
+                  "description": "Tipo de persona responsable: P - Productor, T - Transportista, C - Comerciante"
+                },
+                "company_type": {
+                  "type": "string",
+                  "description": "Tipo de establecimiento de origen"
+                },
+                "company_id": {
+                  "type": "string",
+                  "description": "ID de establecimiento de origen"
+                },
+                "department_origin": {
+                  "type": "string",
+                  "description": "Código de departamento  de origen"
+                },
+                "province_origin": {
+                  "type": "string",
+                  "description": "Código de provincia de origen"
+                },
+                "district_origin": {
+                  "type": "string",
+                  "description": "Código de distrito de origen"
+                },
+                "company_type_destination": {
+                  "type": "string",
+                  "description": "Tipo de establecimiento de destino"
+                },
+                "company_id_destination": {
+                  "type": "string",
+                  "description": "ID de establecimiento de destino"
+                },
+                "department_destination": {
+                  "type": "string",
+                  "description": "Código de departamento  de destino"
+                },
+                "province_destination": {
+                  "type": "string",
+                  "description": "Código de provincia de destino"
+                },
+                "district_destination": {
+                  "type": "string",
+                  "description": "Código de distrito de destino"
+                },
+                "csti_id": {
+                  "type": "string",
+                  "description": "Identificador de CSTI si corresponde"
+                },
+                "start_date": {
+                  "type": "string",
+                  "description": "Fecha de registro (lectura de código o CSTI)"
+                },
+                "comment": {
+                  "type": "string",
+                  "description": "Comentario"
+                },
+                "hq": {
+                  "type": "string",
+                  "description": "Código de sede del registro"
+                }
+              }
+            }
+          
+          }
+        }
+      },
+      "PrimaryProcessingPublic": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": ""
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "hq": { "type": "string", "description": "Código sede" },
+                "department": {
+                  "type": "string",
+                  "description": "Departamento"
+                },
+                "address": { "type": "string", "description": "Dirección" },
+                "id_district": {
+                  "type": "string",
+                  "description": "ID distrito"
+                },
+                "state": { "type": "string", "description": "Estado" },
+                "is_active": { "type": "string", "description": "Activo" },
+                "geo_lat": { "type": "string", "description": "Latitud" },
+                "geo_long": { "type": "string", "description": "Longitud" },
+                "id_file": {
+                  "type": "string",
+                  "description": "Identificador archivo"
+                },
+                "id_report": {
+                  "type": "string",
+                  "description": "Identificador reporte"
+                },
+                "id_report_aui": {
+                  "type": "string",
+                  "description": "Identificador reporte AUI"
+                },
+                "id_establishment": {
+                  "type": "string",
+                  "description": "Identificador establecimiento"
+                },
+                "id_province": {
+                  "type": "string",
+                  "description": "ID provincia"
+                },
+                "id": { "type": "string", "description": "ID" },
+                "name": { "type": "string", "description": "Nombre" },
+                "ruc": { "type": "string", "description": "RUC" },
+                "request_id": {
+                  "type": "string",
+                  "description": "Identificador solicitud"
+                },
+                "food_type": {
+                  "type": "string",
+                  "description": "Tipo de alimento"
+                },
+                "person_type": {
+                  "type": "string",
+                  "description": "Tipo de persona"
+                }
+              }
+            }
+          }
+        }
+      },
+      "OcpoPublic": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": ""
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Identificador del registro"
+                },
+                "start_date": {
+                  "type": "string",
+                  "description": "Fecha de ingreso de solicitud"
+                },
+                "end_date": {
+                  "type": "string",
+                  "description": "Fecha en que el registro fue aprobado por el director"
+                },
+                "fech_modi": {
+                  "type": "string",
+                  "description": "Última modificación"
+                },
+                "year": {
+                  "type": "string",
+                  "description": "Año en que fue otorgada la solicitud"
+                },
+                "certifier_id": {
+                  "type": "string",
+                  "description": "Identificador del certificador"
+                },
+                "document_code": {
+                  "type": "string",
+                  "description": "Número de registro"
+                },
+                "type": {
+                  "type": "string",
+                  "description": "Tipo del establecimiento"
+                },
+                "ruc": {
+                  "type": "string",
+                  "description": "RUC"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "Razón social"
+                },
+                "address_real": {
+                  "type": "string",
+                  "description": "Dirección"
+                },
+                "department": {
+                  "type": "string",
+                  "description": "Código de departamento"
+                },
+                "province": {
+                  "type": "string",
+                  "description": "Código de provincia"
+                },
+                "district": {
+                  "type": "string",
+                  "description": "Código de distrito"
+                },
+                "email": {
+                  "type": "string",
+                  "description": "Email del establecimiento"
+                },
+                "user_code": {
+                  "type": "string",
+                  "description": "Código de usuario en SENASA de la persona jurídica o natural responsable de este establecimiento."
+                },
+                "contact_person_dni": {
+                  "type": "string",
+                  "description": "DNI de la persona natural responsable"
+                },
+                "contact_person_position": {
+                  "type": "string",
+                  "description": "Cargo de la persona natural responsable"
+                },
+                "contact_person_phone": {
+                  "type": "string",
+                  "description": "Teléfono de la persona natural responsable"
+                },
+                "creditor_name": {
+                  "type": "string",
+                  "description": "Nombre del organismo acreditador"
+                },
+                "creditor_phone": {
+                  "type": "string",
+                  "description": "Teléfono de acreditador"
+                },
+                "creditor_address": {
+                  "type": "string",
+                  "description": "Dirección de acreditador"
+                },
+                "creditor_email": {
+                  "type": "string",
+                  "description": "Email de acreditador"
+                },
+                "licence_by": {
+                  "type": "string",
+                  "description": "Organismo que otorga la licencia de certificador"
+                },
+                "certify_wild": {
+                  "type": "string",
+                  "description": "Solicita certificar producción orgánica silvestre (Silvestre)"
+                },
+                "certify_vegetal_production": {
+                  "type": "string",
+                  "description": "Solicita certificar producción orgánica animal (Producción animal)"
+                },
+                "certify_animal_production": {
+                  "type": "string",
+                  "description": "Solicita certificar producción orgánica vegetal (Producción vegetal)"
+                },
+                "certify_comerce": {
+                  "type": "string",
+                  "description": "Solicita certificar comercio de producción orgánica (Comercio)"
+                },
+                "certify_apiculture": {
+                  "type": "string",
+                  "description": "Solicita certificar producción orgánia de apicultura (Apicultura) "
+                },
+                "certify_process": {
+                  "type": "string",
+                  "description": "Solicita certificar procesamiento de producción orgánica (Procesamiento) "
+                }
+              }
+            }
+          }
+        }
+      },
+      "AgriculturalSupplies": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": ""
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "address_legal": {
+                  "type": "string",
+                  "description": "Dirección legal"
+                },
+                "address_real": {
+                  "type": "string",
+                  "description": "Dirección real"
+                },
+                "department": {
+                  "type": "string",
+                  "description": "Código de departamento"
+                },
+                "district": {
+                  "type": "string",
+                  "description": "Código de distrito"
+                },
+                "document_code": {
+                  "type": "string",
+                  "description": "DNI veterinario"
+                },
+                "document_type": {
+                  "type": "string",
+                  "description": "Tipo de documento de identificación del responsable"
+                },
+                "hq": {
+                  "type": "string",
+                  "description": "Código de sede"
+                },
+                "id": {
+                  "type": "string",
+                  "description": "Identificador"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "Razón social"
+                },
+                "province": {
+                  "type": "string",
+                  "description": "Código de provincia"
+                },
+                "ruc": {
+                  "type": "string",
+                  "description": "RUC"
+                },
+                "type": {
+                  "type": "string",
+                  "description": "Tipo de establecimiento"
+                },
+                "year": {
+                  "type": "string",
+                  "description": "Año de solicitud"
+                },
+                "flag_dist_vet": {
+                  "type": "string",
+                  "description": "Distribuidora"
+                },
+                "flag_enva_vet": {
+                  "type": "string",
+                  "description": "Envasadora"
+                },
+                "flag_expe_vet": {
+                  "type": "string",
+                  "description": "Comercializadora"
+                },
+                "flag_expo_vet": {
+                  "type": "string",
+                  "description": "Exportadora"
+                },
+                "flag_fabr_ali": {
+                  "type": "string",
+                  "description": "Alimentos, premezclas, aditivos (Subtipo de fármacos)"
+                },
+                "flag_fabr_alimed": {
+                  "type": "string",
+                  "description": "Alimentos médicados (Subtipo de fármacos)"
+                },
+                "flag_fabr_bio": {
+                  "type": "string",
+                  "description": "Biológicos (Subtipo de fármacos)"
+                },
+                "flag_fabr_far": {
+                  "type": "string",
+                  "description": "Fármacos (Si es que entre los productos que maneja hay fármacos)"
+                },
+                "flag_fabr_vet": {
+                  "type": "string",
+                  "description": "Fabricante"
+                },
+                "flag_impo_vet": {
+                  "type": "string",
+                  "description": "Importador"
+                }
+              }
+            }
+          }
+        }
+      },
+      "FarmPublic": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": ""
+          },
+          "total": {
+            "type": "integer",
+            "description": ""
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "string",
+                  "description": "Identificador de predio"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "Nombre del predio"
+                },
+                "hq": {
+                  "type": "string",
+                  "description": "Código de sede"
+                },
+                "department": {
+                  "type": "string",
+                  "description": "Código de departamento"
+                },
+                "district": {
+                  "type": "string",
+                  "description": "Código de distrito"
+                },
+                "province": {
+                  "type": "string",
+                  "description": "Código de provincia"
+                },
+                "state": {
+                  "type": "string",
+                  "description": "Estado del registro ('A' activo, 'I' inactivo)"
+                },
+                "address_real": {
+                  "type": "string",
+                  "description": "Dirección del predio"
+                },
+                "geo_lat": {
+                  "type": "string",
+                  "description": "Latitud"
+                },
+                "geo_long": {
+                  "type": "string",
+                  "description": "Longitud"
+                },
+                "start_date": {
+                  "type": "string",
+                  "description": "Fecha de creación del registro"
+                },
+                "fech_modi": {
+                  "type": "string",
+                  "description": "Última modificación"
+                },
+                "year": {
+                  "type": "string",
+                  "description": "Año de registro"
+                },
+                "area": {
+                  "type": "string",
+                  "description": "Area del predio"
+                },
+                "farmer_id": {
+                  "type": "string",
+                  "description": "Registro de productor agrario"
+                },
+                "reg_farm_id": {
+                  "type": "string",
+                  "description": "Registro de predio agrario"
+                },
+                "farm_bpp": {
+                  "type": "string",
+                  "description": "Si es productor pecuario"
+                },
+                "farm_bpa": {
+                  "type": "string",
+                  "description": "Si es productor agrícola"
+                },
+                "farmer_state": {
+                  "type": "string",
+                  "description": "Estado del productor"
+                },
+                "farmer_name": {
+                  "type": "string",
+                  "description": "Nombre del productor o responsable"
+                },
+                "farmer_type": {
+                  "type": "string",
+                  "description": "Tipo de productor (Natural o juríca). Si es natural mostrar dni, si es jurídica mostrar dni del responsable, ruc, y farmer_company_name."
+                },
+                "farmer_dni": {
+                  "type": "string",
+                  "description": "DNI del productor"
+                },
+                "farmer_company_name": {
+                  "type": "string",
+                  "description": "Nombre de la empresa productora"
+                },
+                "farmer_ruc": {
+                  "type": "string",
+                  "description": "RUC de la empresa del productor"
+                }
+              }
+            }
+          }
+        }
+      },
+      "ECASFarmPublic": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": ""
+          },
+          "total": {
+            "type": "integer",
+            "description": ""
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "school_id": {
+                  "type": "string",
+                  "description": "Identificador de escuela"
+                },
+                "plague_id": {
+                  "type": "string",
+                  "description": "Código de plaga en evaluación"
+                },
+                "record_id": {
+                  "type": "string",
+                  "description": "Código de registro"
+                },
+                "sequential_pre": {
+                  "type": "string",
+                  "description": "Código secuencial de registro"
+                },
+                "activities": {
+                  "type": "object",
+                  "description": "Actividades realizadas en ECA",
+                  "properties": {
+                    "activity": {
+                      "type": "string",
+                      "description": "Qué se realizó"
+
+                    },
+                    "activity_date": {
+                      "type": "string",
+                      "description": "Cuándo se realizó"
+
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "AgriculturalExporterPublic": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": ""
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "year": {
+                  "type": "string",
+                  "description": "Año de registro"
+                },
+                "type": {
+                  "type": "string",
+                  "description": "Tipo de establecimiento"
+                },
+                "id": {
+                  "type": "string",
+                  "description": "Código del establecimiento (PERSONA_ID)"
+                },
+                "department": {
+                  "type": "string",
+                  "description": "Código de departamento"
+                },
+                "province": {
+                  "type": "string",
+                  "description": "Código de provincia"
+                },
+                "district": {
+                  "type": "string",
+                  "description": "Código de distrito"
+                },
+                "start_date": {
+                  "type": "string",
+                  "description": "Fecha de registro"
+                },
+                "fech_modi": {
+                  "type": "string",
+                  "description": "Última modificación"
+                },
+                "contact_person": {
+                  "type": "string",
+                  "description": "Persona responsable"
+                },
+                "contact_person_dni": {
+                  "type": "string",
+                  "description": "DNI de la persona natural responsable"
+                },
+                "address_legal": {
+                  "type": "string",
+                  "description": "Dirección la persona jurídica o natural responsable"
+                },
+                "contact_person_phone": {
+                  "type": "string",
+                  "description": "Teléfono de la persona jurídica o natural responsable"
+                },
+                "contact_person_mobile_phone": {
+                  "type": "string",
+                  "description": "Teléfono móvil de la persona jurídica o natural responsable"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "Razón social"
+                },
+                "is_active": {
+                  "type": "string",
+                  "description": "Estado: ACTIVO o INACTIVO"
+                }
+              }
+            }
+          }
+        }
+      },
+      "LivestockExporterPublic": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": ""
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "year": {
+                  "type": "string",
+                  "description": "Año de registro"
+                },
+                "type": {
+                  "type": "string",
+                  "description": "Tipo de establecimiento"
+                },
+                "id": {
+                  "type": "string",
+                  "description": "Código del establecimiento"
+                },
+                "hq": {
+                  "type": "string",
+                  "description": "Código Sede"
+                },
+                "department": {
+                  "type": "string",
+                  "description": "Departamento"
+                },
+                "province": {
+                  "type": "string",
+                  "description": "Provincia"
+                },
+                "district": {
+                  "type": "string",
+                  "description": "Distrito"
+                },
+                "address_real": {
+                  "type": "string",
+                  "description": "Dirección del establecimiento"
+                },
+                "line": {
+                  "type": "string",
+                  "description": "Tipo de explotación animal o tipo de producción."
+                },
+                "category": {
+                  "type": "string",
+                  "description": "Tipo de establecimiento: Granja (G), Exportadora (E), Planta de incubación (P), Apicultura (21), Otro (Null)"
+                },
+                "start_date": {
+                  "type": "string",
+                  "description": "Fecha de ingreso de solicitud"
+                },
+                "end_date": {
+                  "type": "string",
+                  "description": "Fecha en que el registro fue aprobado por el director"
+                },
+                "fech_modi": {
+                  "type": "string",
+                  "description": "Última modificación"
+                },
+                "user_code": {
+                  "type": "string",
+                  "description": "Código de usuario en SENASA de la persona jurídica o natural responsable de este establecimiento."
+                },
+                "contact_person": {
+                  "type": "string",
+                  "description": "Persona responsable"
+                },
+                "dni": {
+                  "type": "string",
+                  "description": "DNI de la persona natural responsable"
+                },
+                "address_legal": {
+                  "type": "string",
+                  "description": "Dirección la persona jurídica o natural responsable"
+                },
+                "phone": {
+                  "type": "string",
+                  "description": "Teléfono de la persona jurídica o natural responsable"
+                },
+                "mobile_phone": {
+                  "type": "string",
+                  "description": "Teléfono móvil de la persona jurídica o natural responsable"
+                }
+              }
+            }
+          }
+        }
+      },
+      "ExportProcessingPlantPublic": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": ""
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "year": {
+                  "type": "string",
+                  "description": "Año de registro"
+                },
+                "category": {
+                  "type": "string",
+                  "description": "Tipo de establecimiento: Embalaje de madera, Centro de inspección, Planta de tratamiento, Planta de empaque, o Planta de tratamiento y empaque."
+                },
+                "id": {
+                  "type": "string",
+                  "description": "Código del establecimiento (Código del certificado de la planta)"
+                },
+                "hq": {
+                  "type": "string",
+                  "description": "Código Sede"
+                },
+                "department": {
+                  "type": "string",
+                  "description": "Departamento"
+                },
+                "province": {
+                  "type": "string",
+                  "description": "Provincia"
+                },
+                "district": {
+                  "type": "string",
+                  "description": "Distrito"
+                },
+                "address_real": {
+                  "type": "string",
+                  "description": "Dirección del establecimiento"
+                },
+                "start_date": {
+                  "type": "string",
+                  "description": "Fecha de ingreso de solicitud"
+                },
+                "fech_modi": {
+                  "type": "string",
+                  "description": "Última modificación"
+                },
+                "contact_person": {
+                  "type": "string",
+                  "description": "Persona responsable"
+                },
+                "contact_person_dni": {
+                  "type": "string",
+                  "description": "DNI de la persona natural responsable"
+                },
+                "is_active": {
+                  "type": "boolean",
+                  "description": "Si está activo el establecimiento"
+                },
+                "sequential_id": {
+                  "type": "string",
+                  "description": "Código secuencial del establecimiento"
+                },
+                "application_id": {
+                  "type": "string",
+                  "description": "Código de la solicitud"
+                },
+                "file_id": {
+                  "type": "string",
+                  "description": "Código del expediente del establecimiento"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "Razón social"
+                },
+                "state": {
+                  "type": "string",
+                  "description": "Estado del establecimiento"
+                },
+                "products": {
+                  "type": "object",
+                  "description": "Productos certificados",
+                  "properties": {
+                    "export_code": {
+                      "type": "string",
+                      "description": "Partida arancelaria"
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "Nombre del producto"
+                    },
+                    "scientific_name": {
+                      "type": "string",
+                      "description": "Nombre científico"
+                    },
+                    "product_state":  {
+                      "type": "string",
+                      "description": "Estado de la certificación"
+                    }
+                  }
+
+                }
+                
+              }
+            }
+          }
+        }
+      },
+      "VetCoPrivate": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": ""
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "anno_soli_est": {
+                  "type": "string",
+                  "description": ""
+                },
+                "ccodcli": {
+                  "type": "string",
+                  "description": ""
+                },
+                "codi_depa_dpt": {
+                  "type": "string",
+                  "description": ""
+                },
+                "codi_dist_tdi": {
+                  "type": "string",
+                  "description": ""
+                },
+                "codi_prov_tpr": {
+                  "type": "string",
+                  "description": ""
+                },
+                "codi_sede_sed": {
+                  "type": "string",
+                  "description": ""
+                },
+                "dire_lega_vet": {
+                  "type": "string",
+                  "description": ""
+                },
+                "dire_real_vet": {
+                  "type": "string",
+                  "description": ""
+                },
+                "emai_empr_vet": {
+                  "type": "string",
+                  "description": ""
+                },
+                "esta_empr_vet": {
+                  "type": "string",
+                  "description": ""
+                },
+                "fax_empr_vet": {
+                  "type": "string",
+                  "description": ""
+                },
+                "fech_crea": {
+                  "type": "string",
+                  "description": ""
+                },
+                "fech_modi": {
+                  "type": "string",
+                  "description": ""
+                },
+                "fech_regi_emp": {
+                  "type": "string",
+                  "description": ""
+                },
+                "feex_dist_vet": {
+                  "type": "string",
+                  "description": ""
+                },
+                "feve_dist_vet": {
+                  "type": "string",
+                  "description": ""
+                },
+                "flag_dist_vet": {
+                  "type": "string",
+                  "description": ""
+                },
+                "flag_enva_vet": {
+                  "type": "string",
+                  "description": ""
+                },
+                "flag_expe_vet": {
+                  "type": "string",
+                  "description": ""
+                },
+                "flag_expo_vet": {
+                  "type": "string",
+                  "description": ""
+                },
+                "flag_fabr_ali": {
+                  "type": "string",
+                  "description": ""
+                },
+                "flag_fabr_alimed": {
+                  "type": "string",
+                  "description": ""
+                },
+                "flag_fabr_bio": {
+                  "type": "string",
+                  "description": ""
+                },
+                "flag_fabr_far": {
+                  "type": "string",
+                  "description": ""
+                },
+                "flag_fabr_vet": {
+                  "type": "string",
+                  "description": ""
+                },
+                "flag_impo_vet": {
+                  "type": "string",
+                  "description": ""
+                },
+                "lice_func_mun": {
+                  "type": "string",
+                  "description": ""
+                },
+                "nume_docu_vet": {
+                  "type": "string",
+                  "description": ""
+                },
+                "razo_soci_vet": {
+                  "type": "string",
+                  "description": ""
+                },
+                "regi_padr_emp": {
+                  "type": "string",
+                  "description": ""
+                },
+                "regi_prof_ppr": {
+                  "type": "string",
+                  "description": ""
+                },
+                "regi_soli_est": {
+                  "type": "string",
+                  "description": ""
+                },
+                "ruc_empr_vet": {
+                  "type": "string",
+                  "description": ""
+                }
+              }
+            }
+          }
+        }
+      },
+      "SolSanitarioPublic": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Autorización sanitaria de establecimiento dedicada al procesamiento primario de alimentos agropecuarios y piensos"
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "description": "Tipo de establecimiento"
+                },
+                "id": {
+                  "type": "integer",
+                  "description": "Identificador"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "Razón social"
+                },
+                "department": {
+                  "type": "string",
+                  "description": "Código de departamento"
+                },
+                "province": {
+                  "type": "string",
+                  "description": "Código de provincia"
+                },
+                "district": {
+                  "type": "string",
+                  "description": "Código de distrito"
+                },
+                "ruc": {
+                  "type": "string",
+                  "description": "RUC"
+                },
+                "address_legal": {
+                  "type": "string",
+                  "description": "Dirección legal"
+                },
+                "ruc_profesional": {
+                  "type": "string",
+                  "description": "RUC profesional responsable"
+                },
+                "address_real": {
+                  "type": "string",
+                  "description": "Dirección"
+                }
+              }
+            }
+          }
+        }
+      },
+      "PoultryFarm": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": ""
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "description": "Tipo de establecimiento"
+                },
+                "id": {
+                  "type": "string",
+                  "description": "Identificador"
+                },
+                "capacidad_diaria": {
+                  "type": "integer",
+                  "description": "Capacidad diaria"
+                },
+                "capacidad_instalada": {
+                  "type": "integer",
+                  "description": "Capacidad instalada"
+                },
+                "apellido_materno_solicitante": {
+                  "type": "string",
+                  "description": "Apellido materno de persona natural que realiza el trámite"
+                },
+                "apellido_paterno_solicitante": {
+                  "type": "string",
+                  "description": "Apellido paterno de persona natural que realiza el trámite"
+                },
+                "ccodexp": {
+                  "type": "string",
+                  "description": "Código del expediente"
+                },
+                "correo_establecimiento": {
+                  "type": "string",
+                  "description": "Correo electrónico"
+                },
+                "domicilio_legal_interesado": {
+                  "type": "string",
+                  "description": "Dirección"
+                },
+                "email_interesado": {
+                  "type": "string",
+                  "description": "Correo electrónico 2"
+                },
+                "is_active": {
+                  "type": "string",
+                  "description": "Si solicitud está vigente"
+                },
+                "fax_interesado": {
+                  "type": "string",
+                  "description": "Fax"
+                },
+                "nombres_solicitante": {
+                  "type": "string",
+                  "description": "Nombre persona natural que realiza el trámite"
+                },
+                "dni": {
+                  "type": "string",
+                  "description": "DNI"
+                },
+                "file_code": {
+                  "type": "string",
+                  "description": "Código único"
+                },
+                "estate_code": {
+                  "type": "string",
+                  "description": "Código predio"
+                },
+                "department": {
+                  "type": "string",
+                  "description": "Código de departamento"
+                },
+                "province": {
+                  "type": "string",
+                  "description": "Provincia"
+                },
+                "hq": {
+                  "type": "string",
+                  "description": "Código sede"
+                },
+                "ruc": {
+                  "type": "string",
+                  "description": "RUC"
+                },
+                "year": {
+                  "type": "string",
+                  "description": "Año de solicitud"
+                },
+                "solicitud_construccion": {
+                  "type": "string",
+                  "description": "Código de autorización de construcción"
+                },
+                "telefono_establecimiento": {
+                  "type": "string",
+                  "description": "Teléfono"
+                },
+                "telefono_interesado": {
+                  "type": "string",
+                  "description": "Teléfono"
+                },
+                "address_legal": {
+                  "type": "string",
+                  "description": "Dirección legal"
+                },
+                "date": {
+                  "type": "string",
+                  "description": "Fecha de la solicitud"
+                },
+                "state": {
+                  "type": "string",
+                  "description": "Si está vigente"
+                },
+                "fecha_vencimiento_autorizacion": {
+                  "type": "string",
+                  "description": "Fecha de vencimiento"
+                },
+                "tipo_establecimiento": {
+                  "type": "string",
+                  "description": "Tipo de establecimiento"
+                },
+                "geo_lat": {
+                  "type": "string",
+                  "description": "Latitud"
+                },
+                "geo_long": {
+                  "type": "string",
+                  "description": "Longitud"
+                },
+                "giro_granja": {
+                  "type": "integer",
+                  "description": ""
+                },
+                "autorizacion_funcionamiento": {
+                  "type": "string",
+                  "description": "Código de autorización"
+                },
+                "nombre_establecimiento": {
+                  "type": "string",
+                  "description": "Razón social"
+                },
+                "numero_galpones": {
+                  "type": "integer",
+                  "description": "Número de  galpones"
+                },
+                "numero_informe": {
+                  "type": "integer",
+                  "description": "Código de informe"
+                },
+                "numero_registro": {
+                  "type": "integer",
+                  "description": "Código de autorización"
+                },
+                "persona_contactar": {
+                  "type": "string",
+                  "description": "Contacto"
+                },
+                "tipos_ave": {
+                  "type": "string",
+                  "description": "Tipo de ave"
+                },
+                "tipo_documento_interesado": {
+                  "type": "string",
+                  "description": "Tipo de documento de identificación del responsable"
+                }
+              }
+            }
+          }
+        }
+      },
+      "CentroBeneficioPublic": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": ""
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "description": "Tipo de establecimiento"
+                },
+                "id": {
+                  "type": "string",
+                  "description": "Identificador (CODI_CBEN_CBE)"
+                },
+                "is_active": {
+                  "type": "string",
+                  "description": "Si solicitud está vigente"
+                },
+                "dni": {
+                  "type": "string",
+                  "description": "DNI de la persona natural responsable"
+                },
+                "department": {
+                  "type": "string",
+                  "description": "Código de departamento"
+                },
+                "province": {
+                  "type": "string",
+                  "description": "Código de provincia"
+                },
+                "district": {
+                  "type": "string",
+                  "description": "Código de distrito"
+                },
+                "hq": {
+                  "type": "string",
+                  "description": "Código sede"
+                },
+                "ruc": {
+                  "type": "string",
+                  "description": "RUC establecimiento"
+                },
+                "address_real": {
+                  "type": "string",
+                  "description": "Dirección de establecimiento"
+                },
+                "location": {
+                  "type": "string",
+                  "description": "Localidad"
+                },
+                "geo_lat": {
+                  "type": "string",
+                  "description": "Latitud"
+                },
+                "geo_long": {
+                  "type": "string",
+                  "description": "Longitud"
+                },
+                "start_date": {
+                  "type": "string",
+                  "description": "Fecha de ingreso de solicitud"
+                },
+                "end_date": {
+                  "type": "string",
+                  "description": "Fecha en que el registro fue aprobado por el director"
+                },
+                "fech_modi": {
+                  "type": "string",
+                  "description": "Última modificación"
+                },
+                "year": {
+                  "type": "string",
+                  "description": "Año en que fue otorgada la solicitud"
+                },
+                "name": {
+                  "type": "string",
+                  "description": "Razón social"
+                },
+                "contact_person": {
+                  "type": "string",
+                  "description": "Nombre persona de contacto"
+                },
+                "phone": {
+                  "type": "string",
+                  "description": "Teléfono de persona de contacto"
+                },
+                "line": {
+                  "type": "string",
+                  "description": "Tipo de establecimiento: Rendering, Centro de faenamiento, Matadero o Frigorífico."
+                },
+                "category_2": {
+                  "type": "string",
+                  "description": "Privado o municipal"
+                },
+                "category": {
+                  "type": "string",
+                  "description": "Nivel de tecnificación (Tipo 1, Tipo 2, Tipo 3 o null)"
+                },
+                "name_medi_vet": {
+                  "type": "string",
+                  "description": "Nombre de veterinario responsable"
+                },
+                "vet_code": {
+                  "type": "string",
+                  "description": "Código de veterinario responsable"
+                }
+              }
+            }
+          }
+        }
+      },
+      "AgriculturalExporterCertificatesPublic": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": ""
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "exporter_id": {
+                  "type": "string",
+                  "description": "Tipo de proceso solicitado"
+                },
+                "certificate_id": {
+                  "type": "string",
+                  "description": "Identificador de establecimiento (CODI_CBEN_CBE)"
+                },
+                "certificate_state": {
+                  "type": "string",
+                  "description": "Identificador de autorización"
+                },
+                "file_id": {
+                  "type": "string",
+                  "description": "Tipo de autorización: Construcción oFuncionamiento"
+                },
+                "inspection_place": {
+                  "type": "string",
+                  "description": "Nombre persona de contacto"
+                },
+                "importer": {
+                  "type": "string",
+                  "description": "Dirección de establecimiento autorizado"
+                },
+                "destination": {
+                  "type": "string",
+                  "description": "Fecha de ingreso de solicitud"
+                },
+                "transportation_mode": {
+                  "type": "string",
+                  "description": "Fecha en que fue autorizado"
+                },
+                "code_plant": {
+                  "type": "string",
+                  "description": "RUC establecimiento"
+                },
+                "inspection_date": {
+                  "type": "string",
+                  "description": "Teléfono móvil de persona de contacto"
+                },
+                "export_date": {
+                  "type": "string",
+                  "description": "Tipo de establecimiento: Rendering, Centro de faenamiento, Matadero o Frigorífico."
+                },
+                "products": {
+                  "type": "object",
+                  "description": "Productos exportados.",
+                  "properties": {
+                    "export_code": {
+                      "type": "string",
+                      "description": "Partida arancelaria"
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "Nombre del producto"
+                    },
+                    "scientific_name": {
+                      "type": "string",
+                      "description": "Nombre científico"
+                    },
+                    "origin_farm_id": {
+                      "type": "string",
+                      "description": "Lugar de producción"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "OriginCertificatesPublic": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": ""
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "certificate_id": {
+                  "type": "string",
+                  "description": "Código del certificado"
+                },
+                "application_id": {
+                  "type": "string",
+                  "description": "Código de la solicitud"
+                },
+                "camp_exportacion": {
+                  "type": "string",
+                  "description": "Campaña"
+                },
+                "area": {
+                  "type": "string",
+                  "description": "Área certificada"
+                },
+                "start_date": {
+                  "type": "string",
+                  "description": "Fecha de inicio de actividades"
+                },
+                "products": {
+                  "type": "object",
+                  "description": "Productos certificados",
+                  "properties": {
+                    "export_code": {
+                      "type": "string",
+                      "description": "Partida arancelaria"
+                    },
+                    "name": {
+                      "type": "string",
+                      "description": "Nombre del producto"
+                    },
+                    "scientific_name": {
+                      "type": "string",
+                      "description": "Nombre científico"
+                    },
+                    "codi_hosp_mos": {
+                      "type": "string",
+                      "description": "Código de hospedante"
+                    },
+                    "start_harvest": {
+                      "type": "string",
+                      "description": "Inicio de cosecha"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "AuthSlaughterhousePublic": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": ""
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "description": "Tipo de proceso solicitado"
+                },
+                "id": {
+                  "type": "string",
+                  "description": "Identificador de establecimiento (CODI_CBEN_CBE)"
+                },
+                "auth_id": {
+                  "type": "string",
+                  "description": "Identificador de autorización"
+                },
+                "auth_type": {
+                  "type": "string",
+                  "description": "Tipo de autorización: Construcción oFuncionamiento"
+                },
+                "contact_person": {
+                  "type": "string",
+                  "description": "Nombre persona de contacto"
+                },
+                "address_real": {
+                  "type": "string",
+                  "description": "Dirección de establecimiento autorizado"
+                },
+                "start_date": {
+                  "type": "string",
+                  "description": "Fecha de ingreso de solicitud"
+                },
+                "end_date": {
+                  "type": "string",
+                  "description": "Fecha en que fue autorizado"
+                },
+                "ruc": {
+                  "type": "string",
+                  "description": "RUC establecimiento"
+                },
+                "mobile_phone": {
+                  "type": "string",
+                  "description": "Teléfono móvil de persona de contacto"
+                },
+                "line": {
+                  "type": "string",
+                  "description": "Tipo de establecimiento: Rendering, Centro de faenamiento, Matadero o Frigorífico."
+                },
+                "category_2": {
+                  "type": "string",
+                  "description": "Privado o municipal"
+                },
+                "bird_type": {
+                  "type": "string",
+                  "description": "Tipo de ave autorizada"
+                },
+                "activities": {
+                  "type": "string",
+                  "description": "Lista de actividades autorizadas"
+                },
+                "geo_lat": {
+                  "type": "string",
+                  "description": "Latitud"
+                },
+                "geo_long": {
+                  "type": "string",
+                  "description": "Longitud"
+                }
+              }
+            }
+          }
+        }
+      },
+      "CSTISlaughterhousePublic": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": ""
+          },
+          "data": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "description": "Tipo de vínculo de relación de establecimiento"
+                },
+                "id": {
+                  "type": "string",
+                  "description": "Identificador de establecimiento (CODI_CBEN_CBE)"
+                },
+                "csti_id": {
+                  "type": "string",
+                  "description": "Identificador de CSTI"
+                },
+                "contact_person_dni": {
+                  "type": "string",
+                  "description": "DNI de la persona natural responsable"
+                },
+                "contact_person_type": {
+                  "type": "string",
+                  "description": "Tipo de persona responsable: P - Productor, T - Transportista, C - Comerciante"
+                },
+                "department_origin": {
+                  "type": "string",
+                  "description": "Código de departamento  de origen"
+                },
+                "province_origin": {
+                  "type": "string",
+                  "description": "Código de provincia de origen"
+                },
+                "district_origin": {
+                  "type": "string",
+                  "description": "Código de distrito de origen"
+                },
+                
+                "start_date": {
+                  "type": "string",
+                  "description": "Fecha de ingreso de CSTI"
+                },
+                "valid_start_date": {
+                  "type": "string",
+                  "description": "Fecha en que el CSTI comienza a ser válido"
+                },
+                "valid_days": {
+                  "type": "string",
+                  "description": "Días de validez"
+                },
+                "file_code": {
+                  "type": "string",
+                  "description": "Código de expediente"
+                },
+                "farm": {
+                  "type": "object",
+                  "properties": {
+                    "csti_id" : {
+                      "type": "string",
+                      "description": "Identificador de CSTI"
+                    },
+                    "CODI_SEDE_SED" : {
+                      "type": "string",
+                      "description": "Código de sede del productor"
+                    },
+                    "CODI_PROD_MOS" : {
+                      "type": "string",
+                      "description": "Código del productor"
+                    },
+                    "NOMB_PROD_MOS" : {
+                      "type": "string",
+                      "description": "Nombre del productor"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "Register": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": ""
+          },
+          "password": {
+            "type": "string",
+            "description": ""
+          },
+          "password_confirmation": {
+            "type": "string",
+            "description": ""
+          },
+          "firstname": {
+            "type": "string",
+            "description": ""
+          },
+          "lastname": {
+            "type": "string",
+            "description": ""
+          },
+          "dni": {
+            "type": "string",
+            "description": ""
+          },
+          "role_id": {
+            "type": "integer",
+            "description": ""
+          }
+        }
+      },
+      "RegisterEvent": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Mensaje de éxito"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "access-token"
+      }
+    }
+  },
+  "security": [
+    {
+      "ApiKeyAuth": []
+    }
+  ]
+}

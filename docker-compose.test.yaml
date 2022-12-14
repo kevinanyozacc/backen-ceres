@@ -1,0 +1,214 @@
+version: "3.9"
+services:
+  gateway:
+    build: ./gateway-api
+    deploy:
+      resources:
+        limits:
+          cpus: '0.2'
+          memory: 200M
+    ports:
+      - "3000:80"
+    environment:
+      PRIVATE_KEY: <PRIVATE_KEY>
+      ORIGIN: "*"
+      PORT: 80
+      API_USERS: http://users:8080/api/v1/users
+      API_SEARCH: http://search:8080/api/v1/search
+      API_LIVESTOCK_SUPPLIES: http://livestock_supplies:8080/api/v1/livestock-supplies
+      API_POULTRY_FARM: http://poultry_farm:8080/api/v1/poultry-farm
+      API_SLAUGHTERHOUSE: http://slaughterhouse:8080/api/v1/slaughterhouse
+      API_FEED_PROCESSING: http://feed_processing:8080/api/v1/feed-processing
+      API_AGRICULTURAL_SUPPLIES: http://agricultural_supplies:8080/api/v1/agricultural-supplies
+      API_OCPO_REGISTER: http://organic_certifier:8080/api/v1/organic-certifier
+      API_PRIMARY_PROCESSING: http://primary_processing:8080/api/v1/primary-processing
+      API_AGRICULTURAL_EXPORTER: http://agricultural_exporter:8080/api/v1/agricultural-exporter
+      API_EXPORT_PROCESSING_PLANT: http://export_processing_plant:8080/api/v1/export-processing-plant
+      API_LIVESTOCK_EXPORTER: http://livestock_exporter:8080/api/v1/livestock-exporter
+      API_FARM: http://farm:8080/api/v1/farm
+      API_ANIMAL: http://animal:8080/api/v1/animal
+      SWAGGER_URL: https://trazabilidadsenasa.cl
+      TOKEN_EXPIRES: 10h
+      ADMIN_ROLE: ADMINISTRADOR
+  users:
+    build: ./users-api
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 100M
+    environment:
+      USER: <DB_SENASA_USER>
+      PASSWORD: <DB_SENASA_PASSWORD>
+      DSN: (DESCRIPTION=(ADDRESS= (PROTOCOL=TCP)(HOST=10.0.0.73)(PORT=1521))(CONNECT_DATA=(INSTANCE_NAME=sigqa1)(SERVER=dedicated)(SERVICE_NAME=sigqa)))
+      ORIGIN: https://trazabilidad.senasa.gob.pe
+      PORT: 8080
+  search:
+    build: ./search-api
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 100M
+    environment:
+      USER: <DB_SENASA_USER>
+      PASSWORD: <DB_SENASA_PASSWORD>
+      DSN: (DESCRIPTION=(ADDRESS= (PROTOCOL=TCP)(HOST=10.0.0.73)(PORT=1521))(CONNECT_DATA=(INSTANCE_NAME=sigqa1)(SERVER=dedicated)(SERVICE_NAME=sigqa)))
+      ORIGIN: https://trazabilidad.senasa.gob.pe
+      PORT: 8080
+  livestock_supplies:
+    build: ./livestock-supplies-api
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 100M
+    environment:
+      USER: <DB_SENASA_USER>
+      PASSWORD: <DB_SENASA_PASSWORD>
+      DSN: (DESCRIPTION=(ADDRESS= (PROTOCOL=TCP)(HOST=10.0.0.73)(PORT=1521))(CONNECT_DATA=(INSTANCE_NAME=sigqa1)(SERVER=dedicated)(SERVICE_NAME=sigqa)))
+      ORIGIN: https://trazabilidad.senasa.gob.pe
+      PORT: 8080
+  poultry_farm:
+    build: ./poultry-farm-api
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 100M
+    environment:
+      USER: <DB_SENASA_USER>
+      PASSWORD: <DB_SENASA_PASSWORD>
+      DSN: (DESCRIPTION=(ADDRESS= (PROTOCOL=TCP)(HOST=10.0.0.73)(PORT=1521))(CONNECT_DATA=(INSTANCE_NAME=sigqa1)(SERVER=dedicated)(SERVICE_NAME=sigqa)))
+      ORIGIN: https://trazabilidad.senasa.gob.pe
+      PORT: 8080
+  slaughterhouse:
+    build: ./slaughterhouse-api
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 100M
+    environment:
+      USER: <DB_SENASA_USER>
+      PASSWORD: <DB_SENASA_PASSWORD>
+      DSN: (DESCRIPTION=(ADDRESS= (PROTOCOL=TCP)(HOST=10.0.0.73)(PORT=1521))(CONNECT_DATA=(INSTANCE_NAME=sigqa1)(SERVER=dedicated)(SERVICE_NAME=sigqa)))
+      ORIGIN: https://trazabilidad.senasa.gob.pe
+      PORT: 8080
+  feed_processing:
+    build: ./feed-processing-api
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 100M
+    environment:
+      USER: <DB_SENASA_USER>
+      PASSWORD: <DB_SENASA_PASSWORD>
+      DSN: (DESCRIPTION=(ADDRESS= (PROTOCOL=TCP)(HOST=10.0.0.73)(PORT=1521))(CONNECT_DATA=(INSTANCE_NAME=sigqa1)(SERVER=dedicated)(SERVICE_NAME=sigqa)))
+      ORIGIN: https://trazabilidad.senasa.gob.pe
+      PORT: 8080
+  agricultural_supplies:
+    build: ./agricultural-supplies-api
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 100M
+    environment:
+      USER: <DB_SENASA_USER>
+      PASSWORD: <DB_SENASA_PASSWORD>
+      DSN: (DESCRIPTION=(ADDRESS= (PROTOCOL=TCP)(HOST=10.0.0.73)(PORT=1521))(CONNECT_DATA=(INSTANCE_NAME=sigqa1)(SERVER=dedicated)(SERVICE_NAME=sigqa)))
+      ORIGIN: https://trazabilidad.senasa.gob.pe
+      PORT: 8080
+  organic_certifier:
+    build: ./organic-certifier-api
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 100M
+    environment:
+      USER: <DB_SENASA_USER>
+      PASSWORD: <DB_SENASA_PASSWORD>
+      DSN: (DESCRIPTION=(ADDRESS= (PROTOCOL=TCP)(HOST=10.0.0.73)(PORT=1521))(CONNECT_DATA=(INSTANCE_NAME=sigqa1)(SERVER=dedicated)(SERVICE_NAME=sigqa)))
+      ORIGIN: https://trazabilidad.senasa.gob.pe
+      PORT: 8080
+  primary_processing:
+    build: ./primary-processing-api
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 100M
+    environment:
+      USER: <DB_SENASA_USER>
+      PASSWORD: <DB_SENASA_PASSWORD>
+      DSN: (DESCRIPTION=(ADDRESS= (PROTOCOL=TCP)(HOST=10.0.0.73)(PORT=1521))(CONNECT_DATA=(INSTANCE_NAME=sigqa1)(SERVER=dedicated)(SERVICE_NAME=sigqa)))
+      ORIGIN: https://trazabilidad.senasa.gob.pe
+      PORT: 8080
+  export_processing_plant:
+    build: ./export-processing-plant-api
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 100M
+    environment:
+      USER: <DB_SENASA_USER>
+      PASSWORD: <DB_SENASA_PASSWORD>
+      DSN: (DESCRIPTION=(ADDRESS= (PROTOCOL=TCP)(HOST=10.0.0.73)(PORT=1521))(CONNECT_DATA=(INSTANCE_NAME=sigqa1)(SERVER=dedicated)(SERVICE_NAME=sigqa)))
+      ORIGIN: https://trazabilidad.senasa.gob.pe
+      PORT: 8080
+  agricultural_exporter:
+    build: ./agricultural-exporter-api
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 100M
+    environment:
+      USER: <DB_SENASA_USER>
+      PASSWORD: <DB_SENASA_PASSWORD>
+      DSN: (DESCRIPTION=(ADDRESS= (PROTOCOL=TCP)(HOST=10.0.0.73)(PORT=1521))(CONNECT_DATA=(INSTANCE_NAME=sigqa1)(SERVER=dedicated)(SERVICE_NAME=sigqa)))
+      ORIGIN: https://trazabilidad.senasa.gob.pe
+      PORT: 8080
+  livestock_exporter:
+    build: ./livestock-exporter-api
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 100M
+    environment:
+      USER: <DB_SENASA_USER>
+      PASSWORD: <DB_SENASA_PASSWORD>
+      DSN: (DESCRIPTION=(ADDRESS= (PROTOCOL=TCP)(HOST=10.0.0.73)(PORT=1521))(CONNECT_DATA=(INSTANCE_NAME=sigqa1)(SERVER=dedicated)(SERVICE_NAME=sigqa)))
+      ORIGIN: https://trazabilidad.senasa.gob.pe
+      PORT: 8080
+  farm:
+    build: ./farm-api
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 100M
+    environment:
+      USER: <DB_SENASA_USER>
+      PASSWORD: <DB_SENASA_PASSWORD>
+      DSN: (DESCRIPTION=(ADDRESS= (PROTOCOL=TCP)(HOST=10.0.0.73)(PORT=1521))(CONNECT_DATA=(INSTANCE_NAME=sigqa1)(SERVER=dedicated)(SERVICE_NAME=sigqa)))
+      ORIGIN: https://trazabilidad.senasa.gob.pe
+      PORT: 8080
+  animal:
+    build: ./animal-api
+    deploy:
+      resources:
+        limits:
+          cpus: '0.1'
+          memory: 100M
+    environment:
+      USER: <DB_SENASA_USER>
+      PASSWORD: <DB_SENASA_PASSWORD>
+      DSN: (DESCRIPTION=(ADDRESS= (PROTOCOL=TCP)(HOST=10.0.0.73)(PORT=1521))(CONNECT_DATA=(INSTANCE_NAME=sigqa1)(SERVER=dedicated)(SERVICE_NAME=sigqa)))
+      ORIGIN: https://trazabilidad.senasa.gob.pe
+      PORT: 8080
